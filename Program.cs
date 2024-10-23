@@ -57,4 +57,4 @@ app.MapRazorPages();
 
 app.Run();
 
-//Hello, tôi đang test việc sửa đổi project để đồng bộ lên github, hi vọng sẽ thành công
+//Hello, tôi đang test việc sửa đổi project để đồng bộ lên github, hi vọng sẽ thành công!
