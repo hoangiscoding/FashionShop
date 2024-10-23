@@ -56,3 +56,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+//Hello, tôi đang test việc sửa đổi project để đồng bộ lên github
