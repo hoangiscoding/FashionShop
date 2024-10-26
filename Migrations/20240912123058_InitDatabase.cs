@@ -15,3 +15,4 @@ namespace FashionShop.Migrations
         }
     }
 }
+//
