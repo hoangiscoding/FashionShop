@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FashionShop.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20210924161656_AddingIdentity")]
+    [Migration("20240915161656_AddingIdentity")]
     partial class AddingIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

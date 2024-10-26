@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FashionShop.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20220516124501_CreatingPoHeader")]
+    [Migration("20241022124501_CreatingPoHeader")]
     partial class CreatingPoHeader
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

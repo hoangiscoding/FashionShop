@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FashionShop.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20220507103724_AddSelfForeignKey")]
+    [Migration("20241018103724_AddSelfForeignKey")]
     partial class AddSelfForeignKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
