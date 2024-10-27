@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FashionShop.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Product";
 
     SortModel sortModel = (SortModel)ViewData["sortModel"];
 
@@ -41,6 +41,14 @@
                 <i class="@sortModel.GetColumn("Code").SortIcon" arial-hidden="true"></i>
 
                 <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("Code").SortExpression">
+                    @Html.DisplayNameFor(model => model.Code)
+                </a>
+            </th>
+
+            <th>Image</th>
+            <th>
+                <i class="@sortModel.GetColumn("Code").SortIcon" aria-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("image").SortExpression">
                     @Html.DisplayNameFor(model => model.Code)
                 </a>
             </th>
@@ -98,6 +106,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Code)
             </td>
+
+            <td>
+                    <img src="@(string.IsNullOrEmpty(item.PhotoUrl) ? "/images/noimage.png" : item.PhotoUrl)"
+                         alt="Product Image"
+                         style="width: 50px; height: auto;"
+                         onerror="this.onerror=null;this.src='/images/noimage.png';" />
+
+            </td>           
 
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

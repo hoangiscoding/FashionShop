@@ -1,3 +1,4 @@
+--CREATE DATABASE FashionShop
 USE [FashionShop]
 GO
 /****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 10/26/2024 9:58:50 PM ******/
@@ -518,19 +519,17 @@ INSERT [dbo].[ProductProfiles] ([Id], [Name], [Description]) VALUES (8, N'Electr
 GO
 SET IDENTITY_INSERT [dbo].[ProductProfiles] OFF
 GO
-INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'CD0001', N'Fanta  small', N'Fanta small', 3.0000, 10.0000, 47, 1, 14, 10, 6, N'ff74a651-48fa-402a-acbb-0fbfcb21f0ba_noimage.png')
+INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'CD0001', N'Fanta  small', N'Fanta small', 3.0000, 10.0000, 47, 1, 14, 10, 6, N'images\ff74a651-48fa-402a-acbb-0fbfcb21f0ba_noimage.png')
 GO
-INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'CI0001', N'Dettol Floor Wash', N'Dettol Floor Wash', 3.0000, 9.5000, 34, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0001', N'Red Checked Shirt', N'Red Checked Shirt', 450.0000, 1000.0000, 44, 4, 6, 1, 1, N'images\dfdcaab0-452c-4951-bd4b-240944c97d82_CheckedShirt.jpg')
 GO
-INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0001', N'Red Checked Shirt', N'Red Checked Shirt', 450.0000, 1000.0000, 44, 4, 6, 1, 1, N'dfdcaab0-452c-4951-bd4b-240944c97d82_CheckedShirt.jpg')
+INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0002', N'Black Shirt', N'Black Shirt', 300.0000, 500.0000, 44, 4, 11, 1, 1, N'images\8fb9d234-0d1f-469f-909c-46e6ad7a9d8e_BlackShirt.jpg')
 GO
-INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0002', N'Black Shirt', N'Black Shirt', 300.0000, 500.0000, 44, 4, 11, 1, 1, N'8fb9d234-0d1f-469f-909c-46e6ad7a9d8e_BlackShirt.jpg')
+INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0003', N'Green Shirt', N'Green Shirt', 350.0000, 700.0000, 44, 4, 6, 1, 1, N'images\390ef5f7-5241-401b-9381-a4cc50de91a4_CheckedShirt.jpg')
 GO
-INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0003', N'Green Shirt', N'Green Shirt', 350.0000, 700.0000, 44, 4, 6, 1, 1, N'390ef5f7-5241-401b-9381-a4cc50de91a4_CheckedShirt.jpg')
+INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0004', N'King Kohli Tshirts', N'King Kohli Tshirts', 500.0000, 1000.0000, 44, 4, 6, 1, 1, N'images\d65d6f86-1711-42a0-82b2-9778644637fc_KingKohli.jpg')
 GO
-INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0004', N'King Kohli Tshirts', N'King Kohli Tshirts', 500.0000, 1000.0000, 44, 4, 6, 1, 1, N'd65d6f86-1711-42a0-82b2-9778644637fc_KingKohli.jpg')
-GO
-INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0005', N'Mr.Cool Tshirts', N'Mr.Cool Tshirts', 600.0000, 1200.0000, 44, 4, 6, 1, 1, N'9a0b8232-2f54-438d-b033-efefbe8462ca_captaincool.jpg')
+INSERT [dbo].[Products] ([Code], [Name], [Description], [Cost], [Price], [UnitId], [BrandId], [CategoryId], [ProductGroupId], [ProductProfileId], [PhotoUrl]) VALUES (N'GR0005', N'Mr.Cool Tshirts', N'Mr.Cool Tshirts', 600.0000, 1200.0000, 44, 4, 6, 1, 1, N'images\9a0b8232-2f54-438d-b033-efefbe8462ca_captaincool.jpg')
 GO
 SET IDENTITY_INSERT [dbo].[Suppliers] ON 
 GO
@@ -712,3 +711,13 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Units_UnitId]
 GO
+
+--  insert into Products (Code, Name, Description, Cost, Price, UnitId, BrandId, CategoryId, ProductGroupId, ProductProfileId, PhotoUrl)
+--  values ('Fs0001', 'Clothes', 'Clothes', '300.00', '400.00', '44', '4', '11', '1', '1', 
+--  'images\1.jpg' )
+
+--  delete from Products where Code = 'GR0001'
+
+--  insert into Products (Code,	Name,	Description,	Cost,	Price,	UnitId,	BrandId	,CategoryId	,ProductGroupId,	ProductProfileId,	PhotoUrl)
+--  values
+--('GR0001',	'Red Checked Shirt',	'Red Checked Shirt',	450.00,	1000.00,	'44',	'4',	'6',	'1',	'1',	'images\dfdcaab0-452c-4951-bd4b-240944c97d82_CheckedShirt.jpg')

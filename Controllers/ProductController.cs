@@ -43,6 +43,7 @@ namespace FashionShop.Controllers
             SortModel sortModel = new SortModel();
 
             sortModel.AddColumn("Code");
+            sortModel.AddColumn("image");
             sortModel.AddColumn("name");
             sortModel.AddColumn("description");
             sortModel.AddColumn("Cost");
