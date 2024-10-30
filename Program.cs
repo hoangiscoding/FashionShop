@@ -23,36 +23,48 @@ global using Microsoft.AspNetCore.Http;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using Microsoft.AspNetCore.Identity;
 
+
+
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using FashionShop.Repositories;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using FashionShop.Areas.Identity;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddScoped<IUnit, UnitRepository>();
+
 builder.Services.AddScoped<IProduct, ProductRepo>();
+
 builder.Services.AddScoped<ISupplier, SupplierRepo>();
+
 builder.Services.AddScoped<ICategory, CategoryRepo>();
 builder.Services.AddScoped<IBrand, BrandRepo>();
 builder.Services.AddScoped<IProductProfile, ProductProfileRepo>();
 builder.Services.AddScoped<IProductGroup, ProductGroupRepo>();
+
 builder.Services.AddScoped<ICurrency, CurrencyRepo>();
+
 builder.Services.AddScoped<IPurchaseOrder, PurchaseOrderRepo>();
+
+
+
+//services.AddScoped<IProductAttribute, ProductAttributeRepo>();
 
 builder.Services.AddDbContext<InventoryContext>(options => options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:dbconn").Value));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<InventoryContext>();
 
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+
 
 var app = builder.Build();
+
 
 if (builder.Environment.IsDevelopment())
 {
@@ -79,6 +91,12 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
     endpoints.MapRazorPages();
+
 });
 
 app.Run();
+
+
+
+
+

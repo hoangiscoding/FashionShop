@@ -35,7 +35,7 @@
                         <li class="nav-item">
                             <a class="nav-link @menuTextColor" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (SignInManager.IsSignedIn(User) && UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                        @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="dropdown nav-item pr-2">
                                 <a class="nav-link dropdown-toggle @menuTextColor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -69,6 +69,7 @@
                                 <a class="nav-link dropdown-toggle @menuTextColor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     Transactions
                                 </a>
+
                                 <ul class="dropdown-menu" style="background:linear-gradient(to right,#28340B,#197696);">
                                     <li class="nav-item">
                                         <a class="nav-link @menuTextColor" asp-area="" asp-controller="PurchaseOrder" asp-action="Index">PurchaseOrder</a>
