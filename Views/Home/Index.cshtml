@@ -1,4 +1,7 @@
-﻿@inject SignInManager<IdentityUser> SignInManager
+﻿@using Microsoft.AspNetCore.Identity
+@using FashionShop.Models
+
+@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
 @{
@@ -147,7 +150,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -157,7 +166,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -188,7 +203,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -198,7 +219,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -229,7 +256,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -239,7 +272,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -270,7 +309,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -280,7 +325,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -336,7 +387,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -346,7 +403,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -377,7 +440,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -387,7 +456,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -418,7 +493,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -428,7 +509,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -459,7 +546,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -469,7 +562,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -525,7 +624,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -535,7 +640,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -566,7 +677,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -576,7 +693,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -607,7 +730,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -617,7 +746,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -648,7 +783,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
@@ -658,7 +799,13 @@
                                         <li>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                @if (UserManager.GetUserAsync(User).Result.EmailConfirmed)
+                                                {
+                                                    <a asp-area="" asp-controller="PurchaseOrder" asp-action="Index"><i class="fa fa-shopping-cart"></i></a>
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
