@@ -1,5 +1,4 @@
-﻿
-namespace FashionShop.Controllers
+﻿namespace FashionShop.Controllers
 {
     [Authorize]
     public class SupplierController : Controller

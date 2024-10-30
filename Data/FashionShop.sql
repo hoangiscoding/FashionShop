@@ -538,7 +538,7 @@ Dubai
 UAE
 ', N'633389448')
 GO
-INSERT [dbo].[Suppliers] ([Id], [Code], [Name], [EmailId], [Address], [PhoneNo]) VALUES (2, N'SP0002', N'ARL Enterprises', N'arl@codesbyaniz.com', N'North west road,
+INSERT [dbo].[Suppliers] ([Id], [Code], [Name], [EmailId], [Address], [PhoneNo]) VALUES (2, N'SP0002', N'ARL Enterprises', N'arl@Codes.com', N'North west road,
 Mumbai,
 India', N'76448945545490')
 GO

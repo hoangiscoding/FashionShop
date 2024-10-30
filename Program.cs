@@ -4,7 +4,7 @@ global using FashionShop.Data;
 global using FashionShop.Interfaces;
 global using FashionShop.Models;
 global using Microsoft.EntityFrameworkCore;
-global using CodesByAniz.Tools;
+global using Codes.Tools;
 global using System.ComponentModel.DataAnnotations;
 
 global using Microsoft.AspNetCore.Mvc;
