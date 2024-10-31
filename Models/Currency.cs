@@ -3,27 +3,27 @@
     public class Currency
     {
         [Key]
-        public int Id { get; set; }
+        public string MaTienTe { get; set; }
 
         [Required]
-        [StringLength(25)]
-        public string Name { get; set; }
+        [StringLength(50)]
+        public string TenTienTe { get; set; }
 
         [Required]
-        [StringLength(75)]
-        public string Description { get; set; }
+        [StringLength(100)]
+        public string MoTa { get; set; }
 
         
-        [ForeignKey("Currencies")]
-        public int? ExchangeCurrencyId { get; set; }
+        [ForeignKey("TienTe")]
+        public string? MaTraoDoiTienTe { get; set; }
 
-        public virtual Currency Currencies { get; set; }
+        public virtual Currency TienTe { get; set; }
 
 
 
         [DisplayFormat(DataFormatString = "{0:0.000}",ApplyFormatInEditMode =true)]
-        [Column(TypeName ="smallmoney")]
+        [Column(TypeName ="money")]
         [Required]
-        public decimal ExchangeRate { get; set; }    
+        public decimal TyGiaHoiDoai { get; set; }    
     }
 }

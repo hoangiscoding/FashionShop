@@ -5,71 +5,69 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FashionShop.Migrations
 {
-    public partial class CreatingPoHeader : Migration
+    public partial class CreatingDonHang : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PoHeaders",
+                name: "DonHang",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PoNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    PoDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
-                    BaseCurrencyId = table.Column<int>(type: "int", nullable: false),
-                    PoCurrencyId = table.Column<int>(type: "int", nullable: false),
-                    ExchangeRate = table.Column<decimal>(type: "smallmoney", nullable: false),
-                    DiscountPercent = table.Column<decimal>(type: "smallmoney", nullable: false),
-                    QuotationNo = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    QuotationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaymentTerms = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Remarks = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                    MaDonHang = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime", nullable: false),
+                    MaNCC = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MaTienTeCoSo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MaTienTeDonHang = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TyGiaHoiDoai = table.Column<decimal>(type: "smallmoney", nullable: false),
+                    GiamGia = table.Column<int>(type: "int", nullable: false),
+                    MaBaoGia = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NgayBaoGia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DieuKhoanThanhToan = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    GhiChu = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PoHeaders", x => x.Id);
+                    table.PrimaryKey("PK_DonHang", x => x.MaDonHang);
                     table.ForeignKey(
-                        name: "FK_PoHeaders_Currencies_BaseCurrencyId",
-                        column: x => x.BaseCurrencyId,
-                        principalTable: "Currencies",
-                        principalColumn: "Id",
+                        name: "FK_DonHang_TienTe_MaTienTeCoSo",
+                        column: x => x.MaTienTeCoSo,
+                        principalTable: "TienTe",
+                        principalColumn: "MaTienTeCoSo",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_PoHeaders_Currencies_PoCurrencyId",
-                        column: x => x.PoCurrencyId,
-                        principalTable: "Currencies",
-                        principalColumn: "Id",
+                        name: "FK_DonHang_TienTe_MaTienTeDonHang",
+                        column: x => x.MaTienTeDonHang,
+                        principalTable: "TienTe",
+                        principalColumn: "MaTienTeDonHang",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_PoHeaders_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id",
+                        name: "FK_DonHang_NhaCungCap_MaNCC",
+                        column: x => x.MaNCC,
+                        principalTable: "NhaCungCap",
+                        principalColumn: "MaNCC",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PoHeaders_BaseCurrencyId",
-                table: "PoHeaders",
-                column: "BaseCurrencyId");
+                name: "IX_DonHang_MaTienTeCoSo",
+                table: "DonHang",
+                column: "MaTienTeCoSo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PoHeaders_PoCurrencyId",
-                table: "PoHeaders",
-                column: "PoCurrencyId");
+                name: "IX_DonHang_MaTienTeDonHang",
+                table: "DonHang",
+                column: "MaTienTeDonHang");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PoHeaders_SupplierId",
-                table: "PoHeaders",
-                column: "SupplierId");
+                name: "IX_DonHang_MaNCC",
+                table: "DonHang",
+                column: "MaNCC");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PoHeaders");
+                name: "DonHang");
         }
     }
 }

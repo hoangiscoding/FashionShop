@@ -32,14 +32,14 @@ namespace FashionShop.Controllers
         {
             SortModel sortModel = new SortModel();
             sortModel.AddColumn("Id");
-            sortModel.AddColumn("PoNumber");
-            sortModel.AddColumn("PoDate");
+            sortModel.AddColumn("MaDonHang");
+            sortModel.AddColumn("NgayTao");
             sortModel.ApplySort(sortExpression);
             ViewData["sortModel"] = sortModel;
 
             ViewBag.SearchText = SearchText;
 
-            PaginatedList<PoHeader> items = _Repo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder, SearchText, pg, pageSize);
+            PaginatedList<DonHang> items = _Repo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder, SearchText, pg, pageSize);
 
 
             var pager = new PagerModel(items.TotalRecords, pg, pageSize);
@@ -53,26 +53,26 @@ namespace FashionShop.Controllers
 
         public IActionResult Create()
         {
-            PoHeader item = new PoHeader();
-            item.PoDetails.Add(new PoDetail() { Id = 1 });
-            ViewBag.ProductList = GetProducts();
-            ViewBag.SupplierList = GetSuppliers();
-            ViewBag.PoCurrencyList = GetPoCurrencies();
-            ViewBag.BaseCurrencyList = GetBaseCurrencies();
-            ViewBag.ExchangeRate = GetExchangeRate();
-            item.PoNumber = _Repo.GetNewPONumber();
-            //GetSuppliers()
+            DonHang item = new DonHang();
+            item.ChiTietDonHang.Add(new PoDetail() { MaChiTietDonHang = "1" });
+            ViewBag.ProductList = GetSanPham();
+            ViewBag.SupplierList = GetNhaCungCap();
+            ViewBag.PoCurrencyList = GetPoTienTe();
+            ViewBag.BaseCurrencyList = GetBaseTienTe();
+            ViewBag.TyGiaHoiDoai = GetTyGiaHoiDoai();
+            item.MaDonHang = _Repo.GetNewMaDonHang();
+            //GetNhaCungCap()
 
 
-            //ViewBag.ExchangeCurrencyId = GetCurrencyList();
+            //ViewBag.MaTraoDoiTienTe = GetCurrencyList();
 
             return View(item);
         }
 
         [HttpPost]
-        public IActionResult Create(PoHeader item)
+        public IActionResult Create(DonHang item)
         {
-            item.PoDetails.RemoveAll(a => a.Quantity == 0);
+            item.ChiTietDonHang.RemoveAll(a => a.SoLuong == 0);
 
 
             bool bolret = false;
@@ -97,7 +97,7 @@ namespace FashionShop.Controllers
             }
             else
             {
-                TempData["SuccessMessage"] = "" + item.PoNumber + " Created Successfully";
+                TempData["SuccessMessage"] = "" + item.MaDonHang + " Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -105,26 +105,26 @@ namespace FashionShop.Controllers
 
         public IActionResult Details(int id)
         {
-            PoHeader item = _Repo.GetItem(id);
+            DonHang item = _Repo.GetItem(id);
 
-            ViewBag.ProductList = GetProducts();
-            ViewBag.SupplierList = GetSuppliers();
-            ViewBag.PoCurrencyList = GetPoCurrencies();
-            ViewBag.BaseCurrencyList = GetBaseCurrencies();
+            ViewBag.ProductList = GetSanPham();
+            ViewBag.SupplierList = GetNhaCungCap();
+            ViewBag.PoCurrencyList = GetPoTienTe();
+            ViewBag.BaseCurrencyList = GetBaseTienTe();
 
             return View(item);
         }
 
-        private List<SelectListItem> GetProducts()
+        private List<SelectListItem> GetSanPham()
         {
-            var lstProducts = new List<SelectListItem>();
+            var lstSanPham = new List<SelectListItem>();
 
-            PaginatedList<Product> products = _ProductRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
+            PaginatedList<Product> SanPham = _ProductRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
 
-            lstProducts = products.Select(ut => new SelectListItem()
+            lstSanPham = SanPham.Select(ut => new SelectListItem()
             {
-                Value = ut.Code.ToString(),
-                Text = ut.Name
+                Value = ut.MaSP.ToString(),
+                Text = ut.TenSP
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -133,22 +133,22 @@ namespace FashionShop.Controllers
                 Text = "----Select Product----"
             };
 
-            lstProducts.Insert(0, defItem);
+            lstSanPham.Insert(0, defItem);
 
-            return lstProducts;
+            return lstSanPham;
         }
 
 
-        private List<SelectListItem> GetSuppliers()
+        private List<SelectListItem> GetNhaCungCap()
         {
-            var lstSuppliers = new List<SelectListItem>();
+            var lstNhaCungCap = new List<SelectListItem>();
 
-            PaginatedList<Supplier> suppliers = _SupplierRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
+            PaginatedList<Supplier> NhaCungCap = _SupplierRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
 
-            lstSuppliers = suppliers.Select(sp => new SelectListItem()
+            lstNhaCungCap = NhaCungCap.Select(sp => new SelectListItem()
             {
-                Value = sp.Id.ToString(),
-                Text = sp.Name
+                Value = sp.MaNCC.ToString(),
+                Text = sp.TenNCC
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -157,22 +157,22 @@ namespace FashionShop.Controllers
                 Text = "----Select Supplier ----"
             };
 
-            lstSuppliers.Insert(0, defItem);
+            lstNhaCungCap.Insert(0, defItem);
 
-            return lstSuppliers;
+            return lstNhaCungCap;
         }
 
 
-        private List<SelectListItem> GetPoCurrencies()
+        private List<SelectListItem> GetPoTienTe()
         {
-            var lstCurrencies = new List<SelectListItem>();
+            var lstTienTe = new List<SelectListItem>();
 
-            PaginatedList<Currency> currencies = _CurrencyRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
+            PaginatedList<Currency> TienTe = _CurrencyRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
 
-            lstCurrencies = currencies.Select(sp => new SelectListItem()
+            lstTienTe = TienTe.Select(sp => new SelectListItem()
             {
-                Value = sp.Id.ToString(),
-                Text = sp.Name
+                Value = sp.MaTienTe.ToString(),
+                Text = sp.TenTienTe
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -181,22 +181,22 @@ namespace FashionShop.Controllers
                 Text = "----Select PO Currency ----"
             };
 
-            lstCurrencies.Insert(0, defItem);
+            lstTienTe.Insert(0, defItem);
 
-            return lstCurrencies;
+            return lstTienTe;
         }
 
 
-        private List<SelectListItem> GetBaseCurrencies()
+        private List<SelectListItem> GetBaseTienTe()
         {
-            var lstCurrencies = new List<SelectListItem>();
+            var lstTienTe = new List<SelectListItem>();
 
-            PaginatedList<Currency> currencies = _CurrencyRepo.GetItems("Name", SortOrder.Ascending, "AED", 1, 1000);
+            PaginatedList<Currency> TienTe = _CurrencyRepo.GetItems("Name", SortOrder.Ascending, "AED", 1, 1000);
 
-            lstCurrencies = currencies.Select(sp => new SelectListItem()
+            lstTienTe = TienTe.Select(sp => new SelectListItem()
             {
-                Value = sp.Id.ToString(),
-                Text = sp.Name
+                Value = sp.MaTienTe.ToString(),
+                Text = sp.TenTienTe
             }).ToList();
 
             //var defItem = new SelectListItem()
@@ -205,34 +205,34 @@ namespace FashionShop.Controllers
             //    Text = "----Select Base Currency ----"
             //};
 
-            //lstCurrencies.Insert(0, defItem);
+            //lstTienTe.Insert(0, defItem);
 
-            return lstCurrencies;
+            return lstTienTe;
         }
-        private List<SelectListItem> GetExchangeRate()
+        private List<SelectListItem> GetTyGiaHoiDoai()
         {
-            var lstCurrencies = new List<SelectListItem>();
+            var lstTienTe = new List<SelectListItem>();
 
-            PaginatedList<Currency> currencies = _CurrencyRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
+            PaginatedList<Currency> TienTe = _CurrencyRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
 
-            lstCurrencies = currencies.Select(sp => new SelectListItem()
+            lstTienTe = TienTe.Select(sp => new SelectListItem()
             {
-                Value = sp.Id.ToString(),
-                Text = sp.ExchangeRate.ToString()
+                Value = sp.MaTienTe.ToString(),
+                Text = sp.TyGiaHoiDoai.ToString()
             }).ToList();
 
-            return lstCurrencies;
+            return lstTienTe;
         }
         private List<SelectListItem> GetUnitNames()
         {
-            var lstProducts = new List<SelectListItem>();
+            var lstSanPham = new List<SelectListItem>();
 
-            PaginatedList<Product> products = _ProductRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
+            PaginatedList<Product> SanPham = _ProductRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
 
-            lstProducts = products.Select(ut => new SelectListItem()
+            lstSanPham = SanPham.Select(ut => new SelectListItem()
             {
-                Value = ut.Code.ToString(),
-                Text = ut.Units.Name
+                Value = ut.MaSP.ToString(),
+                Text = ut.DonVi.TenDonVi
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -241,30 +241,30 @@ namespace FashionShop.Controllers
                 Text = "----Select Unit----"
             };
 
-            lstProducts.Insert(0, defItem);
+            lstSanPham.Insert(0, defItem);
 
-            return lstProducts;
+            return lstSanPham;
         }
 
 
         public IActionResult Edit(int id)
         {
-            PoHeader item = _Repo.GetItem(id);
+            DonHang item = _Repo.GetItem(id);
 
-            ViewBag.ProductList = GetProducts();
-            ViewBag.SupplierList = GetSuppliers();
-            ViewBag.PoCurrencyList = GetPoCurrencies();
-            ViewBag.BaseCurrencyList = GetBaseCurrencies();
-            ViewBag.ExchangeRate = GetExchangeRate();
+            ViewBag.ProductList = GetSanPham();
+            ViewBag.SupplierList = GetNhaCungCap();
+            ViewBag.PoCurrencyList = GetPoTienTe();
+            ViewBag.BaseCurrencyList = GetBaseTienTe();
+            ViewBag.TyGiaHoiDoai = GetTyGiaHoiDoai();
             ViewBag.UnitNames = GetUnitNames();
 
             return View(item);
         }
 
         [HttpPost]
-        public IActionResult Edit(PoHeader item)
+        public IActionResult Edit(DonHang item)
         {
-            item.PoDetails.RemoveAll(a => a.Quantity == 0);
+            item.ChiTietDonHang.RemoveAll(a => a.SoLuong == 0);
 
 
             bool bolret = false;
@@ -289,27 +289,27 @@ namespace FashionShop.Controllers
             }
             else
             {
-                TempData["SuccessMessage"] = "" + item.PoNumber + " Modified Successfully";
+                TempData["SuccessMessage"] = "" + item.MaDonHang + " Modified Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
         public IActionResult Delete(int id)
         {
-            PoHeader item = _Repo.GetItem(id);
+            DonHang item = _Repo.GetItem(id);
 
-            ViewBag.ProductList = GetProducts();
-            ViewBag.SupplierList = GetSuppliers();
-            ViewBag.PoCurrencyList = GetPoCurrencies();
-            ViewBag.BaseCurrencyList = GetBaseCurrencies();
+            ViewBag.ProductList = GetSanPham();
+            ViewBag.SupplierList = GetNhaCungCap();
+            ViewBag.PoCurrencyList = GetPoTienTe();
+            ViewBag.BaseCurrencyList = GetBaseTienTe();
 
 
             return View(item);
         }
 
         [HttpPost]
-        public IActionResult Delete(PoHeader item)
+        public IActionResult Delete(DonHang item)
         {
-            item.PoDetails.RemoveAll(a => a.Quantity == 0);
+            item.ChiTietDonHang.RemoveAll(a => a.SoLuong == 0);
 
 
             bool bolret = false;
@@ -334,7 +334,7 @@ namespace FashionShop.Controllers
             }
             else
             {
-                TempData["SuccessMessage"] = "" + item.PoNumber + " Deleted Successfully";
+                TempData["SuccessMessage"] = "" + item.MaDonHang + " Deleted Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }

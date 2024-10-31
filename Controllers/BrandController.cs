@@ -16,7 +16,7 @@ namespace FashionShop.Controllers
         {
             SortModel sortModel = new SortModel();
             sortModel.AddColumn("name");
-            sortModel.AddColumn("description");
+            sortModel.AddColumn("MoTa");
             sortModel.ApplySort(sortExpression);
             ViewData["sortModel"] = sortModel;
 
@@ -50,11 +50,11 @@ namespace FashionShop.Controllers
             string errMessage = "";
             try
             {
-                if (item.Description.Length < 4 || item.Description == null)
-                    errMessage = "Description Must be atleast 4 Characters";
+                if (item.MoTa.Length < 4 || item.MoTa == null)
+                    errMessage = "MoTa Must be atleast 4 Characters";
 
-                if (_Repo.IsItemExists(item.Name) == true)
-                    errMessage = errMessage + " " + " Name " + item.Name + " Exists Already";
+                if (_Repo.IsItemExists(item.TenThuongHieu) == true)
+                    errMessage = errMessage + " " + " Name " + item.TenThuongHieu + " Exists Already";
 
                 if (errMessage == "")
                 {
@@ -74,7 +74,7 @@ namespace FashionShop.Controllers
             }
             else
             {
-                TempData["SuccessMessage"] = "" + item.Name + " Created Successfully";
+                TempData["SuccessMessage"] = "" + item.TenThuongHieu + " Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -101,16 +101,16 @@ namespace FashionShop.Controllers
 
             try
             {
-                if (item.Description.Length < 4 || item.Description == null)
-                    errMessage = "Description Must be atleast 4 Characters";
+                if (item.MoTa.Length < 4 || item.MoTa == null)
+                    errMessage = "MoTa Must be atleast 4 Characters";
 
-                if (_Repo.IsItemExists(item.Name, item.Id) == true)
-                    errMessage = errMessage + item.Name + " Already Exists";
+                if (_Repo.IsItemExists(item.TenThuongHieu, int.Parse(item.MaThuongHieu)) == true)
+                    errMessage = errMessage + item.TenThuongHieu + " Already Exists";
 
                 if (errMessage == "")
                 {
                     item = _Repo.Edit(item);
-                    TempData["SuccessMessage"] = item.Name + ", Saved Successfully";
+                    TempData["SuccessMessage"] = item.TenThuongHieu + ", Saved Successfully";
                     bolret = true;
                 }
             }
@@ -164,7 +164,7 @@ namespace FashionShop.Controllers
             if (TempData["CurrentPage"] != null)
                 currentPage = (int)TempData["CurrentPage"];
 
-            TempData["SuccessMessage"] = item.Name + " Deleted Successfully";
+            TempData["SuccessMessage"] = item.TenThuongHieu + " Deleted Successfully";
             return RedirectToAction(nameof(Index), new { pg = currentPage });
 
 

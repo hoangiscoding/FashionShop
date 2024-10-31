@@ -10,99 +10,95 @@ namespace FashionShop.Migrations
           
 
             migrationBuilder.CreateTable(
-                name: "Brands",
+                name: "ThuongHieu",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false)
+                    MaThuongHieu = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TenThuongHieu = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MoTa = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Brands", x => x.Id);
+                    table.PrimaryKey("PK_ThuongHieu", x => x.MaThuongHieu);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "DanhMuc",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false)
+                    MaDanhMuc = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TenDanhMuc = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MoTa = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_DanhMuc", x => x.MaDanhMuc);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductGroups",
+                name: "NhomSP",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false)
+                    MaNhomSP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TenNhom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MoTa = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductGroups", x => x.Id);
+                    table.PrimaryKey("PK_NhomSP", x => x.MaNhomSP);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductProfiles",
+                name: "HoSoSP",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false)
+                    MaHoSoSP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TenHoSoSP = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    MoTa = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductProfiles", x => x.Id);
+                    table.PrimaryKey("PK_HoSoSP", x => x.MaHoSoSP);
                 });                                                            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                name: "QuyenVaiTro");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                name: "QuyenNguoiDung");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                name: "ThongTinDangNhap");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                name: "VaiTroNguoiDung");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                name: "TokenNguoiDung");
 
             migrationBuilder.DropTable(
-                name: "Brands");
+                name: "ThuongHieu");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "DanhMuc");
 
             migrationBuilder.DropTable(
-                name: "ProductGroups");
+                name: "NhomSP");
 
             migrationBuilder.DropTable(
-                name: "ProductProfiles");
+                name: "HoSoSP");
 
             migrationBuilder.DropTable(
-                name: "Units");
+                name: "DonVi");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "VaiTro");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "NguoiDung");
         }
     }
 }

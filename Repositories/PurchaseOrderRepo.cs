@@ -15,14 +15,14 @@
         {
             _context = context;
         }
-        public bool Create(PoHeader poHeader)
+        public bool Create(DonHang DonHang)
         {
             bool retVal = false;
             _errors = "";
 
             try
             {
-                _context.PoHeaders.Add(poHeader);
+                _context.DonHang.Add(DonHang);
                 _context.SaveChanges();
                 retVal = true;
             }
@@ -33,15 +33,15 @@
             return retVal;
         }
 
-        public bool Delete(PoHeader poHeader)
+        public bool Delete(DonHang DonHang)
         {
             bool retVal = false;
             _errors = "";
 
             try
             {
-                _context.Attach(poHeader);
-                _context.Entry(poHeader).State = EntityState.Deleted;
+                _context.Attach(DonHang);
+                _context.Entry(DonHang).State = EntityState.Deleted;
                 _context.SaveChanges();
                 retVal = true;
             }
@@ -52,7 +52,7 @@
             return retVal;
         }
 
-        public bool Edit(PoHeader poHeader)
+        public bool Edit(DonHang DonHang)
         {
             bool retVal = false;
             _errors = "";
@@ -60,13 +60,13 @@
             try
             {
 
-                List<PoDetail> poDetails = _context.PoDetails.Where(d => d.PoId == poHeader.Id).ToList();
-                _context.PoDetails.RemoveRange(poDetails);
+                List<PoDetail> ChiTietDonHang = _context.ChiTietDonHang.Where(d => d.MaDonHang == DonHang.MaDonHang).ToList();
+                _context.ChiTietDonHang.RemoveRange(ChiTietDonHang);
                 _context.SaveChanges();
 
-                _context.Attach(poHeader);
-                _context.Entry(poHeader).State = EntityState.Modified;
-                _context.PoDetails.AddRange(poHeader.PoDetails);
+                _context.Attach(DonHang);
+                _context.Entry(DonHang).State = EntityState.Modified;
+                _context.ChiTietDonHang.AddRange(DonHang.ChiTietDonHang);
                 _context.SaveChanges();
 
 
@@ -82,48 +82,48 @@
 
 
 
-        private List<PoHeader> DoSort(List<PoHeader> items, string SortProperty, SortOrder sortOrder)
+        private List<DonHang> DoSort(List<DonHang> items, string SortProperty, SortOrder sortOrder)
         {
 
-            if (SortProperty.ToLower() == "ponumber")
+            if (SortProperty.ToLower() == "MaDonHang")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.PoNumber).ToList();
+                    items = items.OrderBy(n => n.MaDonHang).ToList();
                 else
-                    items = items.OrderByDescending(n => n.PoNumber).ToList();
+                    items = items.OrderByDescending(n => n.MaDonHang).ToList();
             }
-            else if (SortProperty.ToLower() == "quotationno")
+            else if (SortProperty.ToLower() == "MaBaoGia")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.QuotationNo).ToList();
+                    items = items.OrderBy(n => n.MaBaoGia).ToList();
                 else
-                    items = items.OrderByDescending(n => n.QuotationNo).ToList();
+                    items = items.OrderByDescending(n => n.MaBaoGia).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderByDescending(d => d.Id).ToList();
+                    items = items.OrderByDescending(d => d.MaDonHang).ToList();
                 else
-                    items = items.OrderBy(d => d.Id).ToList();
+                    items = items.OrderBy(d => d.MaDonHang).ToList();
             }
 
             return items;
         }
 
-        public PaginatedList<PoHeader> GetItems(string SortProperty, SortOrder sortOrder, string SearchText = "", int pageIndex = 1, int pageSize = 5)
+        public PaginatedList<DonHang> GetItems(string SortProperty, SortOrder sortOrder, string SearchText = "", int pageIndex = 1, int pageSize = 5)
         {
-            List<PoHeader> items;
+            List<DonHang> items;
 
             if (SearchText != "" && SearchText != null)
             {
-                items = _context.PoHeaders.Where(n => n.PoNumber.Contains(SearchText) || n.QuotationNo.Contains(SearchText))
+                items = _context.DonHang.Where(n => n.MaDonHang.Contains(SearchText) || n.MaBaoGia.Contains(SearchText))
                     .Include(s => s.Supplier)
                     .Include(c => c.BaseCurrency)
                     .Include(f => f.POCurrency)
                     .ToList();
             }
             else
-                items = _context.PoHeaders
+                items = _context.DonHang
                    .Include(s => s.Supplier)
                    .Include(c => c.BaseCurrency)
                    .Include(f => f.POCurrency)
@@ -134,86 +134,86 @@
 
             items = DoSort(items, SortProperty, sortOrder);
 
-            PaginatedList<PoHeader> retItems = new PaginatedList<PoHeader>(items, pageIndex, pageSize);
+            PaginatedList<DonHang> retItems = new PaginatedList<DonHang>(items, pageIndex, pageSize);
 
             return retItems;
         }
 
-        public PoHeader GetItem(int Id)
+        public DonHang GetItem(int Id)
         {
-            PoHeader item = _context.PoHeaders.Where(i => i.Id == Id)
-                     .Include(d => d.PoDetails)
+            DonHang item = _context.DonHang.Where(i => i.MaDonHang == Id.ToString())
+                     .Include(d => d.ChiTietDonHang)
                      .ThenInclude(i => i.Product)
-                     .ThenInclude(u => u.Units)
+                     .ThenInclude(u => u.DonVi)
                      .FirstOrDefault();
 
 
-            item.PoDetails.ForEach(i => i.UnitName = i.Product.Units.Name);
-            item.PoDetails.ForEach(p => p.Description = p.Product.Description);
-            item.PoDetails.ForEach(p => p.Total = p.Quantity * p.PrcInBaseCur);
+            item.ChiTietDonHang.ForEach(i => i.UnitName = i.Product.DonVi.TenDonVi);
+            item.ChiTietDonHang.ForEach(p => p.MoTa = p.Product.MoTa);
+            item.ChiTietDonHang.ForEach(p => p.Total = p.SoLuong * p.PrcInBaseCur);
 
             return item;
         }
 
-        public bool IsPoNumberExists(string ponumber)
+        public bool IsMaDonHangExists(string MaDonHang)
         {
-            int ct = _context.PoHeaders.Where(n => n.PoNumber.ToLower() == ponumber.ToLower()).Count();
+            int ct = _context.DonHang.Where(n => n.MaDonHang.ToLower() == MaDonHang.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
                 return false;
         }
 
-        public bool IsPoNumberExists(string ponumber, int Id = 0)
+        public bool IsMaDonHangExists(string MaDonHang, int Id = 0)
         {
             if (Id == 0)
-                return IsPoNumberExists(ponumber);
+                return IsMaDonHangExists(MaDonHang);
 
-            var poHeads = _context.PoHeaders.Where(n => n.PoNumber == ponumber).Max(cd => cd.Id);
-            if (poHeads == 0 || poHeads == Id)
+            var poHeads = _context.DonHang.Where(n => n.MaDonHang == MaDonHang).Max(cd => cd.MaDonHang);
+            if (poHeads == null || poHeads == MaDonHang)
                 return false;
             else
                 return true;
         }
 
-        public bool IsQuotationNoExists(string quotationNo)
+        public bool IsMaBaoGiaExists(string MaBaoGia)
         {
-            int ct = _context.PoHeaders.Where(n => n.QuotationNo.ToLower() == quotationNo.ToLower()).Count();
+            int ct = _context.DonHang.Where(n => n.MaBaoGia.ToLower() == MaBaoGia.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
                 return false;
         }
-        public bool IsQuotationNoExists(string quotationNo, int Id = 0)
+        public bool IsMaBaoGiaExists(string MaBaoGia, int Id = 0)
         {
             if (Id == 0)
-                return IsQuotationNoExists(quotationNo);
+                return IsMaBaoGiaExists(MaBaoGia);
 
-            var strQuotNo = _context.PoHeaders.Where(n => n.QuotationNo == quotationNo).Max(nm => nm.Id);
-            if (strQuotNo == 0 || strQuotNo == Id)
+            var strQuotNo = _context.DonHang.Where(n => n.MaBaoGia == MaBaoGia).Max(nm => nm.MaDonHang);
+            if (strQuotNo == null || strQuotNo == Id.ToString()) 
                 return false;
             else
                 return true;
         }
-        public string GetNewPONumber()
+        public string GetNewMaDonHang()
         {
 
-            string ponumber = "";
-            var LastPoNumber = _context.PoHeaders.Max(cd => cd.PoNumber);
+            string MaDonHang = "";
+            var LastMaDonHang = _context.DonHang.Max(cd => cd.MaDonHang);
 
-            if (LastPoNumber == null)
-                ponumber = "PO00001";
+            if (LastMaDonHang == null)
+                MaDonHang = "PO00001";
             else
             {
                 int lastdigit = 1;
-                int.TryParse(LastPoNumber.Substring(2, 5).ToString(), out lastdigit);
+                int.TryParse(LastMaDonHang.Substring(2, 5).ToString(), out lastdigit);
 
 
-                ponumber = "PO" + (lastdigit + 1).ToString().PadLeft(5, '0');
+                MaDonHang = "PO" + (lastdigit + 1).ToString().PadLeft(5, '0');
             }
 
 
-            return ponumber;
+            return MaDonHang;
 
         }
     }

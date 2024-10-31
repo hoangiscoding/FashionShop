@@ -45,20 +45,20 @@ namespace FashionShop.Controllers
             sortModel.AddColumn("Code");
             sortModel.AddColumn("image");
             sortModel.AddColumn("name");
-            sortModel.AddColumn("description");
-            sortModel.AddColumn("Cost");
-            sortModel.AddColumn("Price");
-            sortModel.AddColumn("Unit");
+            sortModel.AddColumn("MoTa");
+            sortModel.AddColumn("DonGiaNhap");
+            sortModel.AddColumn("DonGiaBan");
+            sortModel.AddColumn("DonVi");
             sortModel.ApplySort(sortExpression);
             ViewData["sortModel"] = sortModel;
 
             ViewBag.SearchText = SearchText;
 
-            PaginatedList<Product> products = _productRepo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder, SearchText, pg, pageSize);
+            PaginatedList<Product> SanPham = _productRepo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder, SearchText, pg, pageSize);
 
 
 
-            var pager = new PagerModel(products.TotalRecords, pg, pageSize);
+            var pager = new PagerModel(SanPham.TotalRecords, pg, pageSize);
             pager.SortExpression = sortExpression;
             this.ViewBag.Pager = pager;
 
@@ -66,22 +66,22 @@ namespace FashionShop.Controllers
             TempData["CurrentPage"] = pg;
 
 
-            return View(products);
+            return View(SanPham);
         }
 
 
         private void PopulateViewbags()
         {
 
-            ViewBag.Units = GetUnits();
+            ViewBag.DonVi = GetDonVi();
 
-            ViewBag.Brands = GetBrands();
+            ViewBag.ThuongHieu = GetThuongHieu();
 
-            ViewBag.Categories = GetCategories();
+            ViewBag.DanhMuc = GetDanhMuc();
 
-            ViewBag.ProductGroups = GetProductGroups();
+            ViewBag.NhomSP = GetNhomSP();
 
-            ViewBag.ProductProfiles = GetProductProfiles();
+            ViewBag.HoSoSP = GetHoSoSP();
 
         }
 
@@ -102,24 +102,24 @@ namespace FashionShop.Controllers
             string errMessage = "";
             try
             {
-                if (product.Description.Length < 4 || product.Description == null)
-                    errMessage = "Product Description Must be atleast 4 Characters";
+                if (product.MoTa.Length < 4 || product.MoTa == null)
+                    errMessage = "Product MoTa Must be atleast 4 Characters";
 
 
 
-                if (_productRepo.IsItemCodeExists(product.Code) == true)
-                    errMessage = errMessage + " " + " Product Code " + product.Code + " Exists Already";
+                if (_productRepo.IsItemCodeExists(product.MaSP) == true)
+                    errMessage = errMessage + " " + " Product Code " + product.MaSP + " Exists Already";
 
 
 
-                if (_productRepo.IsItemExists(product.Name) == true)
-                    errMessage = errMessage + " " + " Product Name " + product.Name + " Exists Already";
+                if (_productRepo.IsItemExists(product.TenSP) == true)
+                    errMessage = errMessage + " " + " Product Name " + product.TenSP + " Exists Already";
 
                 if (errMessage == "")
                 {
 
                     string uniqueFileName = GetUploadedFileName(product);
-                    product.PhotoUrl = uniqueFileName;
+                    product.Anh = uniqueFileName;
 
 
                     product = _productRepo.Create(product);
@@ -141,7 +141,7 @@ namespace FashionShop.Controllers
             }
             else
             {
-                TempData["SuccessMessage"] = "Product " + product.Name + " Created Successfully";
+                TempData["SuccessMessage"] = "Product " + product.TenSP + " Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -156,16 +156,16 @@ namespace FashionShop.Controllers
         public IActionResult Edit(string id)
         {
             Product product = _productRepo.GetItem(id);
-            ViewBag.Units = GetUnits();
+            ViewBag.DonVi = GetDonVi();
 
          
-            ViewBag.Brands = GetBrands();
+            ViewBag.ThuongHieu = GetThuongHieu();
 
-            ViewBag.Categories = GetCategories();
+            ViewBag.DanhMuc = GetDanhMuc();
 
-            ViewBag.ProductGroups = GetProductGroups();
+            ViewBag.NhomSP = GetNhomSP();
 
-            ViewBag.ProductProfiles = GetProductProfiles();
+            ViewBag.HoSoSP = GetHoSoSP();
 
             TempData.Keep();
             return View(product);
@@ -179,26 +179,26 @@ namespace FashionShop.Controllers
 
             try
             {
-                if (product.Description.Length < 4 || product.Description == null)
-                    errMessage = "Product Description Must be atleast 4 Characters";
+                if (product.MoTa.Length < 4 || product.MoTa == null)
+                    errMessage = "Product MoTa Must be atleast 4 Characters";
 
 
-                if (_productRepo.IsItemCodeExists(product.Name, product.Code) == true)
-                    errMessage = errMessage + " " + " Product Code " + product.Code + " Exists Already";
+                if (_productRepo.IsItemCodeExists(product.TenSP, product.MaSP) == true)
+                    errMessage = errMessage + " " + " Product Code " + product.MaSP + " Exists Already";
 
-                if (_productRepo.IsItemExists(product.Name, product.Code) == true)
-                    errMessage = errMessage + "Product Name " + product.Name + " Already Exists";
+                if (_productRepo.IsItemExists(product.TenSP, product.MaSP) == true)
+                    errMessage = errMessage + "Product Name " + product.TenSP + " Already Exists";
 
                 if (product.ProductPhoto != null)
                 {
                     string uniqueFileName = GetUploadedFileName(product);
-                    product.PhotoUrl = uniqueFileName;
+                    product.Anh = uniqueFileName;
                 }
 
                 if (errMessage == "")
                 {
                     product = _productRepo.Edit(product);
-                    TempData["SuccessMessage"] = product.Name + ", product Saved Successfully";
+                    TempData["SuccessMessage"] = product.TenSP + ", product Saved Successfully";
                     bolret = true;
                 }
             }
@@ -254,7 +254,7 @@ namespace FashionShop.Controllers
             if (TempData["CurrentPage"] != null)
                 currentPage = (int)TempData["CurrentPage"];
 
-            TempData["SuccessMessage"] = "Product " + product.Name + " Deleted Successfully";
+            TempData["SuccessMessage"] = "Product " + product.TenSP + " Deleted Successfully";
             return RedirectToAction(nameof(Index), new { pg = currentPage });
 
 
@@ -262,15 +262,15 @@ namespace FashionShop.Controllers
 
 
 
-        private List<SelectListItem> GetUnits()
+        private List<SelectListItem> GetDonVi()
         {
-            var lstUnits = new List<SelectListItem>();
+            var lstDonVi = new List<SelectListItem>();
 
-            PaginatedList<Unit> units = _unitRepo.GetItems("Name", SortOrder.Ascending,"",1,1000);
-            lstUnits = units.Select(ut => new SelectListItem()
+            PaginatedList<Unit> DonVi = _unitRepo.GetItems("Name", SortOrder.Ascending,"",1,1000);
+            lstDonVi = DonVi.Select(ut => new SelectListItem()
             {
-                Value = ut.Id.ToString(),
-                Text = ut.Name
+                Value = ut.MaDonVi.ToString(),
+                Text = ut.TenDonVi
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -279,20 +279,20 @@ namespace FashionShop.Controllers
                 Text="----Select Unit----"
             };
 
-            lstUnits.Insert(0, defItem);
+            lstDonVi.Insert(0, defItem);
             
-            return lstUnits;        
+            return lstDonVi;        
         }
 
-        private List<SelectListItem> GetBrands()
+        private List<SelectListItem> GetThuongHieu()
         {
             var lstItems = new List<SelectListItem>();
 
             PaginatedList<Brand> items = _brandRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
             lstItems = items.Select(ut => new SelectListItem()
             {
-                Value = ut.Id.ToString(),
-                Text = ut.Name
+                Value = ut.MaThuongHieu.ToString(),
+                Text = ut.TenThuongHieu
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -307,15 +307,15 @@ namespace FashionShop.Controllers
         }
 
 
-        private List<SelectListItem> GetCategories()
+        private List<SelectListItem> GetDanhMuc()
         {
             var lstItems = new List<SelectListItem>();
 
             PaginatedList<Category> items = _categoryRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
             lstItems = items.Select(ut => new SelectListItem()
             {
-                Value = ut.Id.ToString(),
-                Text = ut.Name
+                Value = ut.MaDanhMuc.ToString(),
+                Text = ut.TenDanhMuc
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -329,15 +329,15 @@ namespace FashionShop.Controllers
             return lstItems;
         }
 
-        private List<SelectListItem> GetProductGroups()
+        private List<SelectListItem> GetNhomSP()
         {
             var lstItems = new List<SelectListItem>();
 
             PaginatedList<ProductGroup> items = _productGroupRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
             lstItems = items.Select(ut => new SelectListItem()
             {
-                Value = ut.Id.ToString(),
-                Text = ut.Name
+                Value = ut.MaNhomSP.ToString(),
+                Text = ut.TenNhom
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -352,15 +352,15 @@ namespace FashionShop.Controllers
         }
 
 
-        private List<SelectListItem> GetProductProfiles()
+        private List<SelectListItem> GetHoSoSP()
         {
             var lstItems = new List<SelectListItem>();
 
             PaginatedList<ProductProfile> items = _productProfileRepo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
             lstItems = items.Select(ut => new SelectListItem()
             {
-                Value = ut.Id.ToString(),
-                Text = ut.Name
+                Value = ut.MaHoSoSP.ToString(),
+                Text = ut.TenHoSoSP
             }).ToList();
 
             var defItem = new SelectListItem()
@@ -394,7 +394,7 @@ namespace FashionShop.Controllers
         }
 
         [AcceptVerbs("Get","Post")]
-        public JsonResult IsProductCodeValid(string Code,string Name="")
+        public JsonResult IsMaSPValid(string Code,string Name="")
         {
 
             bool isExists = _productRepo.IsItemCodeExists(Code,Name);

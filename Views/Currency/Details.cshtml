@@ -12,29 +12,29 @@
     <div class="col-md-4">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="MaTienTe" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" readonly />
+                <label asp-for="TenTienTe" class="control-label"></label>
+                <input asp-for="TenTienTe" class="form-control" readonly />
                 
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" readonly/>
+                <label asp-for="MoTa" class="control-label"></label>
+                <input asp-for="MoTa" class="form-control" readonly/>
                 
             </div>
             <div class="form-group">
-                <label asp-for="ExchangeCurrencyId" class="control-label"></label>
-                <select asp-for="ExchangeCurrencyId" class="form-control" asp-items="ViewBag.ExchangeCurrencyId" readonly></select>
+                <label asp-for="MaTraoDoiTienTe" class="control-label"></label>
+                <select asp-for="MaTraoDoiTienTe" class="form-control" asp-items="ViewBag.MaTraoDoiTienTe" readonly></select>
                 
             </div>
             <div class="form-group">
-                <label asp-for="ExchangeRate" class="control-label"></label>
-                <input asp-for="ExchangeRate" class="form-control" readonly/>                
+                <label asp-for="TyGiaHoiDoai" class="control-label"></label>
+                <input asp-for="TyGiaHoiDoai" class="form-control" readonly/>                
             </div>
       
 <div class="btn-group">
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.MaTienTe">Edit</a>
     <a class="btn btn-secondary" asp-action="index"
        asp-route-pg="@TempData["CurrentPage"]">Back</a>    
 </div>

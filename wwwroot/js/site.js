@@ -64,10 +64,10 @@ function DeleteItem(btn) {
     var rows = table.getElementsByTagName('tr');
 
     var btnIdx = btn.id.replaceAll('btnremove-', '');
-    var idOfQuantity = btnIdx + "__Quantity";
-    var txtQuantity = document.querySelector("[id$='" + idOfQuantity + "']");
+    var idOfSoLuong = btnIdx + "__SoLuong";
+    var txtSoLuong = document.querySelector("[id$='" + idOfSoLuong + "']");
 
-    txtQuantity.value = 0;
+    txtSoLuong.value = 0;
 
 
     var idOfIsDeleted = btnIdx + "__IsDeleted";
@@ -86,7 +86,7 @@ function getExRate(currencyid) {
 
     var lstbox = document.getElementById('dropdownExRate');
 
-    var txtExrate = document.getElementById('txtExchangeRate');
+    var txtExrate = document.getElementById('txtTyGiaHoiDoai');
 
     var items = lstbox.options;
 
@@ -98,9 +98,9 @@ function getExRate(currencyid) {
     }
     return;
 }
-function SetUnitName(txtProductCode) {
+function SetUnitName(txtMaSP) {
 
-    var txtunitNameId = txtProductCode.id.replaceAll('ProductCode', 'UnitName');
+    var txtunitNameId = txtMaSP.id.replaceAll('MaSP', 'UnitName');
 
     var txtunitName = document.getElementById(txtunitNameId);
 
@@ -109,7 +109,7 @@ function SetUnitName(txtProductCode) {
     var items = lstbox.options;
 
     for (var i = items.length - 1; i >= 0; i--) {
-        if (items[i].value == txtProductCode.value) {
+        if (items[i].value == txtMaSP.value) {
             txtunitName.value = items[i].text;
             return;
         }
@@ -130,7 +130,7 @@ function CalcTotals() {
     var totalQty = 0;
     var Amount = 0;
     var totalAmount = 0;
-    var txtExchangeRate = eval(document.getElementById('txtExchangeRate').value);
+    var txtTyGiaHoiDoai = eval(document.getElementById('txtTyGiaHoiDoai').value);
 
 
 
@@ -140,7 +140,7 @@ function CalcTotals() {
 
         var idofIsDeleted = i + "__IsDeleted";
 
-        var idofPrice = i + "__PrcInBaseCur";
+        var idofDonGiaBan = i + "__PrcInBaseCur";
 
         var idofFob = i + "__Fob";
 
@@ -148,7 +148,7 @@ function CalcTotals() {
 
         var hidIsDelId = document.querySelector("[id$='" + idofIsDeleted + "']").id;
 
-        var priceTxtId = document.querySelector("[id$='" + idofPrice + "']").id;
+        var DonGiaBanTxtId = document.querySelector("[id$='" + idofDonGiaBan + "']").id;
 
         var fobTxtId = document.querySelector("[id$='" + idofFob + "']").id;
 
@@ -159,12 +159,12 @@ function CalcTotals() {
             totalQty = totalQty + eval(x[i].value);
 
             var txttotal = document.getElementById(totalTxtId);
-            var txtprice = document.getElementById(priceTxtId);
+            var txtDonGiaBan = document.getElementById(DonGiaBanTxtId);
             var txtfob = document.getElementById(fobTxtId);
 
-            txtprice.value = txtExchangeRate * eval(txtfob.value);
+            txtDonGiaBan.value = txtTyGiaHoiDoai * eval(txtfob.value);
 
-            txttotal.value = eval(x[i].value) * txtprice.value;
+            txttotal.value = eval(x[i].value) * txtDonGiaBan.value;
 
             totalAmount = eval(totalAmount) + eval(txttotal.value);
         }
@@ -176,7 +176,7 @@ function CalcTotals() {
     return;
 }
 document.addEventListener('change', function (e) {
-    if (event.target.id.indexOf('ProductCode') >= 0) {
+    if (event.target.id.indexOf('MaSP') >= 0) {
         SetUnitName(event.target);
     }
 
@@ -184,9 +184,9 @@ document.addEventListener('change', function (e) {
 
 document.addEventListener('change', function (e) {
     if (e.target.classList.contains('QtyTotal')
-        || e.target.classList.contains('PriceTotal')
+        || e.target.classList.contains('DonGiaBanTotal')
         || e.target.classList.contains('FobTotal')
-        || event.target.id == 'PoCurrencyId'
+        || event.target.id == 'MaTienTeDonHang'
     ) {
         CalcTotals();
     }
@@ -195,14 +195,14 @@ document.addEventListener('change', function (e) {
 
 function ShowSearchableList(event) {
 
-    if (event.target.id.indexOf('ProductCode') < 0) {
+    if (event.target.id.indexOf('MaSP') < 0) {
         return;
     }
 
 
     var tid = event.target.id;
 
-    var txtDescId = tid.replaceAll('ProductCode', 'Description');
+    var txtDescId = tid.replaceAll('MaSP', 'MoTa');
 
     var txtValue = document.getElementById('txtValue');
 

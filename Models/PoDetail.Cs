@@ -3,24 +3,24 @@
     public class PoDetail
     {
         [Key]
-        public int Id { get; set; }
+        public string MaChiTietDonHang { get; set; }
 
         [Required]
-        [ForeignKey("PoHeader")]
-        public int PoId { get; set; }
-        public virtual PoHeader PoHeader { get; private set; }
+        [ForeignKey("DonHang")]
+        public string MaDonHang { get; set; }
+        public virtual DonHang DonHang { get; private set; }
 
         [Required]
         [ForeignKey("Product")]
-        [MaxLength(6)]
-        public string ProductCode { get; set; }
+        [MaxLength(50)]
+        public string MaSP { get; set; }
 
         public virtual Product  Product { get; private set; }
 
-        [Column(TypeName = "smallmoney")]
+        [Column(TypeName = "money")]
         [Required]
-        [Range(1,1000,ErrorMessage ="Quantity should be greater than 0 and less than 1000")]
-        public decimal Quantity { get; set; }
+        [Range(1,1000,ErrorMessage ="SoLuong should be greater than 0 and less than 1000")]
+        public decimal SoLuong { get; set; }
 
 
         [Range(1, 10000000, ErrorMessage = "FOB should be greater than 0")]
@@ -29,7 +29,7 @@
         [Required]
         public decimal Fob { get; set; }
 
-        [Range(1, 10000000, ErrorMessage = "Price should be greater than 0")]
+        [Range(1, 10000000, ErrorMessage = "DonGiaBan should be greater than 0")]
         [DisplayFormat(DataFormatString = "{0:0.000}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "smallmoney")]
         [Required]
@@ -37,7 +37,7 @@
         
         [MaxLength(75)]
         [NotMapped]
-        public string Description { get; set; } = "";
+        public string MoTa { get; set; } = "";
 
         [MaxLength(25)]
         [NotMapped]

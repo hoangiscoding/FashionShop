@@ -4,30 +4,29 @@
 
 namespace FashionShop.Migrations
 {
-    public partial class AddCurrencies : Migration
+    public partial class AddTienTe : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Currencies",
+                name: "TienTe",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
-                    ExchangeRate = table.Column<decimal>(type: "smallmoney", nullable: false)
+                    MaTienTe = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TenTienTe = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MoTa = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TyGiaHoiDoai = table.Column<decimal>(type: "money", nullable: false),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Currencies", x => x.Id);
+                    table.PrimaryKey("PK_TienTe", x => x.MaTienTe);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Currencies");
+                name: "TienTe");
         }
     }
 }

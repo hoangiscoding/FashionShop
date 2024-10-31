@@ -4,15 +4,15 @@
     public class ProductProfile
     {
         [Key]
-        public int Id { get; set; }
+        public string MaHoSoSP { get; set; }
 
         [Required]
         [StringLength(25)]
-        public string Name { get; set; }
+        public string TenHoSoSP { get; set; }
 
         [Required]
         [StringLength(75)]
-        public string Description { get; set; }
+        public string MoTa { get; set; }
 
     }
 }

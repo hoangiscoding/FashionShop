@@ -4,54 +4,53 @@
 
 namespace FashionShop.Migrations
 {
-    public partial class CreatePoDetails : Migration
+    public partial class CreateChiTietDonHang : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PoDetails",
+                name: "ChiTietDonHang",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PoId = table.Column<int>(type: "int", nullable: false),
-                    ProductCode = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    Quantity = table.Column<decimal>(type: "smallmoney", nullable: false),
+                    MaChiTietDonHang = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MaDonHang = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MaSP = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SoLuong = table.Column<decimal>(type: "money", nullable: false),
                     Fob = table.Column<decimal>(type: "smallmoney", nullable: false),
                     PrcInBaseCur = table.Column<decimal>(type: "smallmoney", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PoDetails", x => x.Id);
+                    table.PrimaryKey("PK_ChiTietDonHang", x => x.MaChiTietDonHang);
                     table.ForeignKey(
-                        name: "FK_PoDetails_PoHeaders_PoId",
-                        column: x => x.PoId,
-                        principalTable: "PoHeaders",
-                        principalColumn: "Id",
+                        name: "FK_ChiTietDonHang_DonHang_MaDonHang",
+                        column: x => x.MaDonHang,
+                        principalTable: "DonHang",
+                        principalColumn: "MaDonHang",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PoDetails_Products_ProductCode",
-                        column: x => x.ProductCode,
-                        principalTable: "Products",
-                        principalColumn: "Code",
+                        name: "FK_ChiTietDonHang_SanPham_MaSP",
+                        column: x => x.MaSP,
+                        principalTable: "SanPham",
+                        principalColumn: "MaSP",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PoDetails_PoId",
-                table: "PoDetails",
-                column: "PoId");
+                name: "IX_ChiTietDonHang_MaDonHang",
+                table: "ChiTietDonHang",
+                column: "MaDonHang");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PoDetails_ProductCode",
-                table: "PoDetails",
-                column: "ProductCode");
+                name: "IX_ChiTietDonHang_MaSP",
+                table: "ChiTietDonHang",
+                column: "MaSP");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PoDetails");
+                name: "ChiTietDonHang");
         }
     }
 }

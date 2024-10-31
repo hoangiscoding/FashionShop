@@ -17,7 +17,7 @@ namespace FashionShop.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("PhienBanSP", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("FashionShop.Models.Unit", b =>
@@ -27,7 +27,7 @@ namespace FashionShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
+                    b.Property<string>("MoTa")
                         .IsRequired()
                         .HasMaxLength(75)
                         .HasColumnType("nvarchar(75)");
@@ -39,7 +39,7 @@ namespace FashionShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Units");
+                    b.ToTable("DonVi");
                 });
 #pragma warning restore 612, 618
         }

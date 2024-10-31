@@ -16,16 +16,16 @@ namespace FashionShop.Controllers
         {
             SortModel sortModel = new SortModel();
             sortModel.AddColumn("name");
-            sortModel.AddColumn("description");
+            sortModel.AddColumn("MoTa");
             sortModel.ApplySort(sortExpression);
             ViewData["sortModel"] = sortModel;
             
             ViewBag.SearchText = SearchText;
 
-            PaginatedList<Unit> units = _unitRepo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder,SearchText,pg,pageSize);            
+            PaginatedList<Unit> DonVi = _unitRepo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder,SearchText,pg,pageSize);            
             
 
-            var pager = new PagerModel(units.TotalRecords, pg, pageSize);
+            var pager = new PagerModel(DonVi.TotalRecords, pg, pageSize);
             pager.SortExpression = sortExpression;
             this.ViewBag.Pager = pager;
 
@@ -33,7 +33,7 @@ namespace FashionShop.Controllers
             TempData["CurrentPage"] = pg;
 
 
-            return View(units);
+            return View(DonVi);
         }
 
 
@@ -50,11 +50,11 @@ namespace FashionShop.Controllers
             string errMessage = "";
             try
             {
-                if (unit.Description.Length < 4 || unit.Description == null)               
-                    errMessage = "Unit Description Must be atleast 4 Characters";
+                if (unit.MoTa.Length < 4 || unit.MoTa == null)               
+                    errMessage = "Unit MoTa Must be atleast 4 Characters";
 
-                if (_unitRepo.IsUnitNameExists(unit.Name) == true)
-                    errMessage = errMessage + " " + " Unit Name " + unit.Name +" Exists Already";
+                if (_unitRepo.IsUnitNameExists(unit.TenDonVi) == true)
+                    errMessage = errMessage + " " + " Unit Name " + unit.TenDonVi +" Exists Already";
 
                 if (errMessage == "")
                 {
@@ -74,7 +74,7 @@ namespace FashionShop.Controllers
             }
             else
             {
-                TempData["SuccessMessage"] = "Unit " + unit.Name + " Created Successfully";
+                TempData["SuccessMessage"] = "Unit " + unit.TenDonVi + " Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -101,16 +101,16 @@ namespace FashionShop.Controllers
 
             try
             {
-                if (unit.Description.Length < 4 || unit.Description == null)                
-                   errMessage = "Unit Description Must be atleast 4 Characters";
+                if (unit.MoTa.Length < 4 || unit.MoTa == null)                
+                   errMessage = "Unit MoTa Must be atleast 4 Characters";
 
-                if (_unitRepo.IsUnitNameExists(unit.Name, unit.Id) == true)
-                    errMessage = errMessage + "Unit Name " + unit.Name + " Already Exists";
+                if (_unitRepo.IsUnitNameExists(unit.TenDonVi, int.Parse(unit.MaDonVi)) == true)
+                    errMessage = errMessage + "Unit Name " + unit.TenDonVi + " Already Exists";
 
                 if (errMessage == "")
                 {
                     unit = _unitRepo.Edit(unit);
-                    TempData["SuccessMessage"] = unit.Name + ", Unit Saved Successfully";
+                    TempData["SuccessMessage"] = unit.TenDonVi + ", Unit Saved Successfully";
                     bolret = true;
                 }
             }
@@ -163,7 +163,7 @@ namespace FashionShop.Controllers
             if (TempData["CurrentPage"] != null)
                 currentPage = (int)TempData["CurrentPage"];
 
-            TempData["SuccessMessage"] = "Unit " + unit.Name + " Deleted Successfully";
+            TempData["SuccessMessage"] = "Unit " + unit.TenDonVi + " Deleted Successfully";
             return RedirectToAction(nameof(Index), new { pg = currentPage });
 
 

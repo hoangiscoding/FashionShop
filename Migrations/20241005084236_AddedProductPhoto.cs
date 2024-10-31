@@ -7,8 +7,8 @@ namespace FashionShop.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "PhotoUrl",
-                table: "Products",
+                name: "Anh",
+                table: "SanPham",
                 type: "nvarchar(max)",
                 nullable: true);
         }
@@ -16,8 +16,8 @@ namespace FashionShop.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "PhotoUrl",
-                table: "Products");
+                name: "Anh",
+                table: "SanPham");
         }
     }
 }

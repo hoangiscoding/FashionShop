@@ -4,7 +4,7 @@
 
 namespace FashionShop.Migrations
 {
-    public partial class AddingPodetailsList : Migration
+    public partial class AddingChiTietDonHangList : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

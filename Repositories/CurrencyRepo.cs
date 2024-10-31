@@ -19,13 +19,13 @@
 
                 //check the entity against rules list.
                 //1. rule 
-                if (!IsDescriptionValid(currency)) return false;
+                if (!IsMoTaValid(currency)) return false;
 
                 //2. rule
-                if (IsItemExists(currency.Name)) return false;                    
+                if (IsItemExists(currency.TenTienTe)) return false;                    
 
                 
-                _context.Currencies.Add(currency);
+                _context.TienTe.Add(currency);
                 _context.SaveChanges();
                 return true;
             }
@@ -40,7 +40,7 @@
         {
             try
             {
-                _context.Currencies.Attach(currency);
+                _context.TienTe.Attach(currency);
                 _context.Entry(currency).State = EntityState.Deleted;
                 _context.SaveChanges();
                 return true;
@@ -62,12 +62,12 @@
             {
                 //check the entity against rules list.
                 //1. rule 
-                if (!IsDescriptionValid(currency)) return false;
+                if (!IsMoTaValid(currency)) return false;
 
                 //2. rule
-                if (IsItemExists(currency.Name,currency.Id)) return false;
+                if (IsItemExists(currency.TenTienTe, int.Parse(currency.MaTienTe))) return false;
 
-                _context.Currencies.Attach(currency);
+                _context.TienTe.Attach(currency);
                 _context.Entry(currency).State = EntityState.Modified;
                 _context.SaveChanges();
                 return true;
@@ -90,16 +90,16 @@
             if (SortProperty.ToLower() == "name")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.Name).ToList();
+                    items = items.OrderBy(n => n.TenTienTe).ToList();
                 else
-                    items = items.OrderByDescending(n => n.Name).ToList();
+                    items = items.OrderByDescending(n => n.TenTienTe).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(d => d.Description).ToList();
+                    items = items.OrderBy(d => d.MoTa).ToList();
                 else
-                    items = items.OrderByDescending(d => d.Description).ToList();
+                    items = items.OrderByDescending(d => d.MoTa).ToList();
             }
 
             return items;
@@ -107,7 +107,7 @@
 
         public Currency GetItem(int id)
         {
-            Currency item = _context.Currencies.Where(u => u.Id == id).FirstOrDefault();
+            Currency item = _context.TienTe.Where(u => u.MaTienTe == id.ToString()).FirstOrDefault();
             return item;
         }
 
@@ -118,11 +118,11 @@
 
             if (SearchText != "" && SearchText != null)
             {
-                items = _context.Currencies.Where(n => n.Name.Contains(SearchText) || n.Description.Contains(SearchText))
+                items = _context.TienTe.Where(n => n.TenTienTe.Contains(SearchText) || n.MoTa.Contains(SearchText))
                     .ToList();
             }
             else
-                items = _context.Currencies.ToList();
+                items = _context.TienTe.ToList();
 
             items = DoSort(items, SortProperty, sortOrder);
 
@@ -136,7 +136,7 @@
         //Rules List
         public bool IsCurrencyCombExists(int srcCurrencyId, int excCurrencyId)
         {
-            int ct = _context.Currencies.Where(n => n.Id==srcCurrencyId && n.ExchangeCurrencyId== excCurrencyId).Count();
+            int ct = _context.TienTe.Where(n => n.MaTienTe==srcCurrencyId.ToString() && n.MaTraoDoiTienTe== excCurrencyId.ToString()).Count();
             if (ct > 0)
                 return true;
             else
@@ -145,7 +145,7 @@
 
         public bool IsItemExists(string name)
         {
-            int ct = _context.Currencies.Where(n => n.Name.ToLower() == name.ToLower()).Count();
+            int ct = _context.TienTe.Where(n => n.TenTienTe.ToLower() == name.ToLower()).Count();
             if (ct > 0)
             {
                 _errors= " Name " + name + " Exists Already";
@@ -157,18 +157,18 @@
 
         public bool IsItemExists(string name, int id)
         {
-            int ct = _context.Currencies.Where(n => n.Name.ToLower() == name.ToLower() && n.Id != id).Count();
+            int ct = _context.TienTe.Where(n => n.TenTienTe.ToLower() == name.ToLower() && n.MaTienTe != id.ToString()).Count();
             if (ct > 0)
                 return true;
             else
                 return false;
         }
 
-        private bool IsDescriptionValid(Currency item)
+        private bool IsMoTaValid(Currency item)
         {
-            if (item.Description.Length < 4 || item.Description == null)
+            if (item.MoTa.Length < 4 || item.MoTa == null)
             {
-                _errors = "Description Must be atleast 4 Characters";
+                _errors = "MoTa Must be atleast 4 Characters";
                 return false;
             }
             return true;

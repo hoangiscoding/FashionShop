@@ -3,15 +3,15 @@
     public class Unit
     {
         [Key]
-        public int Id { get; set; }
+        public string MaDonVi { get; set; }
 
         [Required]
         [StringLength(25)]
-        public string Name { get; set; }
+        public string TenDonVi { get; set; }
 
         [Required]
         [StringLength(75)]
-        public string Description { get; set; }
+        public string MoTa { get; set; }
 
     }
 }

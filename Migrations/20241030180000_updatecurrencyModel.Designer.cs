@@ -4,6 +4,7 @@ using FashionShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FashionShop.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    partial class InventoryContextModelSnapshot : ModelSnapshot
+    [Migration("20241030180000_updatecurrencyModel")]
+    partial class updatecurrencyModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,18 +336,18 @@ namespace FashionShop.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("NormalizedName")
+                    b.Property<string>("TenChuanHoa")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
+                    b.HasIndex("TenChuanHoa")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasFilter("[TenChuanHoa] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("VaiTro", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -356,21 +358,21 @@ namespace FashionShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClaimType")
+                    b.Property<string>("LoaiQuyen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
+                    b.Property<string>("GiaTriQuyen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
+                    b.Property<string>("MaVaiTro")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("MaVaiTro");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("QuyenVaiTro", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -398,11 +400,11 @@ namespace FashionShop.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("NormalizedEmail")
+                    b.Property<string>("EmailChuanHoa")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("NormalizedUserName")
+                    b.Property<string>("TenChuanHoa")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -427,15 +429,15 @@ namespace FashionShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
+                    b.HasIndex("EmailChuanHoa")
                         .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
+                    b.HasIndex("TenChuanHoa")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasFilter("[TenChuanHoa] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("NguoiDung", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -446,68 +448,68 @@ namespace FashionShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClaimType")
+                    b.Property<string>("LoaiQuyen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
+                    b.Property<string>("GiaTriQuyen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("MaNguoiDung")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("MaNguoiDung");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("QuyenNguoiDung", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
+                    b.Property<string>("NCCDangNhap")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<string>("ProviderKey")
+                    b.Property<string>("KhoaNCC")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<string>("ProviderDisplayName")
+                    b.Property<string>("TenNCCDichVu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("MaNguoiDung")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                    b.HasKey("NCCDangNhap", "KhoaNCC");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("MaNguoiDung");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("ThongTinDangNhap", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("MaNguoiDung")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleId")
+                    b.Property<string>("MaVaiTro")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.HasKey("MaNguoiDung", "MaVaiTro");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("MaVaiTro");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("VaiTroNguoiDung", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("MaNguoiDung")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LoginProvider")
+                    b.Property<string>("NCCDangNhap")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
@@ -518,9 +520,9 @@ namespace FashionShop.Migrations
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                    b.HasKey("MaNguoiDung", "NCCDangNhap", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("TokenNguoiDung", (string)null);
                 });
 
             modelBuilder.Entity("FashionShop.Models.Currency", b =>
@@ -617,7 +619,7 @@ namespace FashionShop.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("MaVaiTro")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -626,7 +628,7 @@ namespace FashionShop.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("MaNguoiDung")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -635,7 +637,7 @@ namespace FashionShop.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("MaNguoiDung")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -644,13 +646,13 @@ namespace FashionShop.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("MaVaiTro")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("MaNguoiDung")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -659,7 +661,7 @@ namespace FashionShop.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("MaNguoiDung")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

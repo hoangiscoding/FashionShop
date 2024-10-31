@@ -7,27 +7,25 @@ namespace FashionShop.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Suppliers",
+                name: "NhaCungCap",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
-                    EmailId = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: true),
-                    PhoneNo = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: true)
+                    MaNCC = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TenNCC = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    DiaChi= table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: true),
+                    SDT = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
+                    table.PrimaryKey("PK_NhaCungCap", x => x.MaNCC);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Suppliers");
+                name: "NhaCungCap");
         }
     }
 }

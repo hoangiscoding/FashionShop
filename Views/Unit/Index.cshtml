@@ -46,15 +46,15 @@
                 <i class="@sortModel.GetColumn("name").SortIcon" arial-hidden="true"></i>
 
                 <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("name").SortExpression">
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayNameFor(model => model.TenDonVi)
                 </a>
             </th>
             <th>
 
-                <i class="@sortModel.GetColumn("description").SortIcon" arial-hidden="true"></i>
+                <i class="@sortModel.GetColumn("MoTa").SortIcon" arial-hidden="true"></i>
 
-                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("description").SortExpression">
-                    @Html.DisplayNameFor(model => model.Description)
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("MoTa").SortExpression">
+                    @Html.DisplayNameFor(model => model.MoTa)
                 </a>
             </th>
             <th></th>
@@ -65,26 +65,26 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.TenDonVi)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.DisplayFor(modelItem => item.MoTa)
                 </td>
                 <td>
                     <div class="btn-group">
-                        <a asp-action="Edit" asp-route-id="@item.Id">
+                        <a asp-action="Edit" asp-route-id="@item.MaDonVi">
                             <span class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </span>
                         </a>
 
-                        <a asp-action="Details" asp-route-id="@item.Id">
+                        <a asp-action="Details" asp-route-id="@item.MaDonVi">
                             <span class="btn btn-sm btn-outline-dark">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </span>
                         </a>
 
-                        <a asp-action="Delete" asp-route-id="@item.Id">
+                        <a asp-action="Delete" asp-route-id="@item.MaDonVi">
                             <span class="btn btn-sm btn-outline-danger">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </span>

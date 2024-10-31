@@ -13,23 +13,23 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="TenTienTe" class="control-label"></label>
+                <input asp-for="TenTienTe" class="form-control" />
+                <span asp-validation-for="TenTienTe" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="MoTa" class="control-label"></label>
+                <input asp-for="MoTa" class="form-control" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ExchangeCurrencyId" class="control-label"></label>
-                <select asp-for="ExchangeCurrencyId" class ="form-control" asp-items="ViewBag.ExchangeCurrencyId"></select>
+                <label asp-for="MaTraoDoiTienTe" class="control-label"></label>
+                <select asp-for="MaTraoDoiTienTe" class ="form-control" asp-items="ViewBag.MaTraoDoiTienTe"></select>
             </div>
             <div class="form-group">
-                <label asp-for="ExchangeRate" class="control-label"></label>
-                <input asp-for="ExchangeRate" class="form-control" />
-                <span asp-validation-for="ExchangeRate" class="text-danger"></span>
+                <label asp-for="TyGiaHoiDoai" class="control-label"></label>
+                <input asp-for="TyGiaHoiDoai" class="form-control" />
+                <span asp-validation-for="TyGiaHoiDoai" class="text-danger"></span>
             </div>
           
             

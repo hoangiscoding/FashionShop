@@ -8,38 +8,38 @@ namespace FashionShop.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "ExchangeCurrencyId",
-                table: "Currencies",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "MaTraoDoiTienTe",
+                table: "TienTe",
+                type: "nvarchar(50)",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Currencies_ExchangeCurrencyId",
-                table: "Currencies",
-                column: "ExchangeCurrencyId");
+                name: "IX_TienTe_MaTraoDoiTienTe",
+                table: "TienTe",
+                column: "MaTraoDoiTienTe");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Currencies_Currencies_ExchangeCurrencyId",
-                table: "Currencies",
-                column: "ExchangeCurrencyId",
-                principalTable: "Currencies",
-                principalColumn: "Id");
+                name: "FK_TienTe_TienTe_MaTraoDoiTienTe",
+                table: "TienTe",
+                column: "MaTraoDoiTienTe",
+                principalTable: "TienTe",
+                principalColumn: "MaTraoDoiTienTe");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Currencies_Currencies_ExchangeCurrencyId",
-                table: "Currencies");
+                name: "FK_TienTe_TienTe_MaTraoDoiTienTe",
+                table: "TienTe");
 
             migrationBuilder.DropIndex(
-                name: "IX_Currencies_ExchangeCurrencyId",
-                table: "Currencies");
+                name: "IX_TienTe_MaTraoDoiTienTe",
+                table: "TienTe");
 
             migrationBuilder.DropColumn(
-                name: "ExchangeCurrencyId",
-                table: "Currencies");
+                name: "MaTraoDoiTienTe",
+                table: "TienTe");
         }
     }
 }

@@ -10,14 +10,14 @@ namespace FashionShop.Repositories
         }
         public ProductGroup Create(ProductGroup ProductGroup)
         {
-            _context.ProductGroups.Add(ProductGroup);
+            _context.NhomSP.Add(ProductGroup);
             _context.SaveChanges();
             return ProductGroup;
         }
 
         public ProductGroup Delete(ProductGroup ProductGroup)
         {
-            _context.ProductGroups.Attach(ProductGroup);
+            _context.NhomSP.Attach(ProductGroup);
             _context.Entry(ProductGroup).State = EntityState.Deleted;
             _context.SaveChanges();
             return ProductGroup;
@@ -25,7 +25,7 @@ namespace FashionShop.Repositories
 
         public ProductGroup Edit(ProductGroup ProductGroup)
         {
-            _context.ProductGroups.Attach(ProductGroup);
+            _context.NhomSP.Attach(ProductGroup);
             _context.Entry(ProductGroup).State = EntityState.Modified;
             _context.SaveChanges();
             return ProductGroup;
@@ -38,16 +38,16 @@ namespace FashionShop.Repositories
             if (SortProperty.ToLower() == "name")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.Name).ToList();
+                    items = items.OrderBy(n => n.TenNhom).ToList();
                 else
-                    items = items.OrderByDescending(n => n.Name).ToList();
+                    items = items.OrderByDescending(n => n.TenNhom).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(d => d.Description).ToList();
+                    items = items.OrderBy(d => d.MoTa).ToList();
                 else
-                    items = items.OrderByDescending(d => d.Description).ToList();
+                    items = items.OrderByDescending(d => d.MoTa).ToList();
             }
 
             return items;
@@ -59,11 +59,11 @@ namespace FashionShop.Repositories
 
             if (SearchText != "" && SearchText != null)
             {
-                items = _context.ProductGroups.Where(n => n.Name.Contains(SearchText) || n.Description.Contains(SearchText))
+                items = _context.NhomSP.Where(n => n.TenNhom.Contains(SearchText) || n.MoTa.Contains(SearchText))
                     .ToList();
             }
             else
-                items = _context.ProductGroups.ToList();
+                items = _context.NhomSP.ToList();
 
             items = DoSort(items, SortProperty, sortOrder);
 
@@ -74,12 +74,12 @@ namespace FashionShop.Repositories
 
         public ProductGroup GetItem(int id)
         {
-            ProductGroup item = _context.ProductGroups.Where(u => u.Id == id).FirstOrDefault();
+            ProductGroup item = _context.NhomSP.Where(u => u.MaNhomSP == id.ToString()).FirstOrDefault();
             return item;
         }
         public bool IsItemExists(string name)
         {
-            int ct = _context.ProductGroups.Where(n => n.Name.ToLower() == name.ToLower()).Count();
+            int ct = _context.NhomSP.Where(n => n.TenNhom.ToLower() == name.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -88,7 +88,7 @@ namespace FashionShop.Repositories
 
         public bool IsItemExists(string name, int Id)
         {
-            int ct = _context.ProductGroups.Where(n => n.Name.ToLower() == name.ToLower() && n.Id != Id).Count();
+            int ct = _context.NhomSP.Where(n => n.TenNhom.ToLower() == name.ToLower() && n.MaNhomSP != Id.ToString()).Count();
             if (ct > 0)
                 return true;
             else

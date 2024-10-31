@@ -12,14 +12,14 @@ namespace FashionShop.Repositories
 
         public Supplier Create(Supplier supplier)
         {
-            _context.Suppliers.Add(supplier);
+            _context.NhaCungCap.Add(supplier);
             _context.SaveChanges();
             return supplier;
         }
 
         public Supplier Delete(Supplier supplier)
         {
-            _context.Suppliers.Attach(supplier);
+            _context.NhaCungCap.Attach(supplier);
             _context.Entry(supplier).State = EntityState.Deleted;
             _context.SaveChanges();
             return supplier;
@@ -27,7 +27,7 @@ namespace FashionShop.Repositories
 
         public Supplier Edit(Supplier supplier)
         {
-            _context.Suppliers.Attach(supplier);
+            _context.NhaCungCap.Attach(supplier);
             _context.Entry(supplier).State = EntityState.Modified;
             _context.SaveChanges();
             return supplier;
@@ -35,55 +35,55 @@ namespace FashionShop.Repositories
 
         public Supplier GetItem(int id)
         {
-            Supplier supplier = _context.Suppliers.Where(s => s.Id == id).FirstOrDefault();
+            Supplier supplier = _context.NhaCungCap.Where(s => int.Parse(s.MaNCC) == id).FirstOrDefault();
             return supplier;
         }
 
-        private List<Supplier> DoSort(List<Supplier> suppliers, string SortProperty, SortOrder sortOrder)
+        private List<Supplier> DoSort(List<Supplier> NhaCungCap, string SortProperty, SortOrder sortOrder)
         {
             if (SortProperty.ToLower() == "name")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    suppliers = suppliers.OrderBy(n => n.Name).ToList();
+                    NhaCungCap = NhaCungCap.OrderBy(n => n.TenNCC).ToList();
                 else
-                    suppliers = suppliers.OrderByDescending(n => n.Name).ToList();
+                    NhaCungCap = NhaCungCap.OrderByDescending(n => n.TenNCC).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    suppliers = suppliers.OrderBy(d => d.Code).ToList();
+                    NhaCungCap = NhaCungCap.OrderBy(d => d.MaNCC).ToList();
                 else
-                    suppliers = suppliers.OrderByDescending(d => d.Code).ToList();
+                    NhaCungCap = NhaCungCap.OrderByDescending(d => d.MaNCC).ToList();
             }
 
-            return suppliers;
+            return NhaCungCap;
         }
 
         public PaginatedList<Supplier> GetItems(string SortProperty, SortOrder sortOrder, string SearchText = "", int pageIndex = 1, int pageSize = 5)
         {
 
-            List<Supplier> suppliers;
+            List<Supplier> NhaCungCap;
 
             if (SearchText != "" && SearchText != null)
             {
-                suppliers = _context.Suppliers.Where(n => n.Name.Contains(SearchText) || n.Code.Contains(SearchText))
+                NhaCungCap = _context.NhaCungCap.Where(n => n.TenNCC.Contains(SearchText) || n.MaNCC.Contains(SearchText))
                     .ToList();
             }
             else
-                suppliers = _context.Suppliers.ToList();
+                NhaCungCap = _context.NhaCungCap.ToList();
 
-            suppliers = DoSort(suppliers, SortProperty, sortOrder);
+            NhaCungCap = DoSort(NhaCungCap, SortProperty, sortOrder);
 
-            PaginatedList<Supplier> retsuppliers = new PaginatedList<Supplier>(suppliers, pageIndex, pageSize);
+            PaginatedList<Supplier> retNhaCungCap = new PaginatedList<Supplier>(NhaCungCap, pageIndex, pageSize);
 
-            return retsuppliers;
+            return retNhaCungCap;
 
         }
 
         public bool IsSupplierCodeExists(string code)
         {
             
-            int ct = _context.Suppliers.Where(s => s.Code.ToLower() == code.ToLower()).Count();
+            int ct = _context.NhaCungCap.Where(s => s.MaNCC.ToLower() == code.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -92,7 +92,7 @@ namespace FashionShop.Repositories
         }
         public bool IsSupplierCodeExists(string code, int Id)
         {
-            int ct = _context.Suppliers.Where(s => s.Code.ToLower() == code.ToLower() &&  s.Id!=Id).Count();
+            int ct = _context.NhaCungCap.Where(s => s.MaNCC.ToLower() == code.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -101,7 +101,7 @@ namespace FashionShop.Repositories
         }
         public bool IsSupplierEmailExists(string email)
         {
-            int ct = _context.Suppliers.Where(s => s.EmailId.ToLower() == email.ToLower()).Count();
+            int ct = _context.NhaCungCap.Where(s => s.Email.ToLower() == email.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -110,7 +110,7 @@ namespace FashionShop.Repositories
         }
         public bool IsSupplierEmailExists(string email, int Id)
         {
-            int ct = _context.Suppliers.Where(s => s.EmailId.ToLower() == email.ToLower() && s.Id != Id).Count();
+            int ct = _context.NhaCungCap.Where(s => s.Email.ToLower() == email.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -118,7 +118,7 @@ namespace FashionShop.Repositories
         }
         public bool IsSupplierNameExists(string name)
         {
-            int ct = _context.Suppliers.Where(s => s.Name.ToLower() == name.ToLower()).Count();
+            int ct = _context.NhaCungCap.Where(s => s.TenNCC.ToLower() == name.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -127,7 +127,7 @@ namespace FashionShop.Repositories
         }
         public bool IsSupplierNameExists(string name, int Id)
         {
-            int ct = _context.Suppliers.Where(s => s.Name.ToLower() == name.ToLower() && s.Id != Id).Count();
+            int ct = _context.NhaCungCap.Where(s => s.TenNCC.ToLower() == name.ToLower()).Count();
             if (ct > 0)
                 return true;
             else

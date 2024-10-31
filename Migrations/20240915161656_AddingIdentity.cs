@@ -8,212 +8,212 @@ namespace FashionShop.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
+                name: "VaiTro",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MaVaiTro = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TenVaiTro = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    TenChuanHoa = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    DauThoiGian = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                    table.PrimaryKey("PK_VaiTro", x => x.MaVaiTro);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "NguoiDung",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    MaNguoiDung = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    TenDangNhap = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    TenChuanHoa = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    EmailChuanHoa = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    XacThucEmail = table.Column<bool>(type: "bit", nullable: false),
+                    MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConDauBaoMat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DauHieuDongThoi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    XacThucSDT = table.Column<bool>(type: "bit", nullable: false),
+                    XacThuc2Buoc = table.Column<bool>(type: "bit", nullable: false),
+                    ThoiDiemKhoaTK = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    TrangThai = table.Column<bool>(type: "bit", nullable: false),
+                    SoLanDangNhapThatBai = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_NguoiDung", x => x.MaNguoiDung);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "QuyenVaiTro",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MaVaiTro = table.Column<string>(type: "nvarchar(40)", nullable: false),
+                    LoaiQuyen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GiaTriQuyen = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_QuyenVaiTro", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        name: "FK_QuyenVaiTro_VaiTro_MaVaiTro",
+                        column: x => x.MaVaiTro,
+                        principalTable: "VaiTro",
+                        principalColumn: "MaVaiTro",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
+                name: "QuyenNguoiDung",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    MaQuyen = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MaNguoiDung = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    LoaiQuyen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GiaTri = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.PrimaryKey("PK_QuyenNguoiDung", x => x.MaQuyen);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        name: "FK_QuyenNguoiDung_NguoiDung_MaNguoiDung",
+                        column: x => x.MaNguoiDung,
+                        principalTable: "NguoiDung",
+                        principalColumn: "NguoiDung",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
+                name: "ThongTinDangNhap",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    NCCDangNhap = table.Column<string>(type: "nvarchar50)", maxLength: 50, nullable: false),
+                    KhoaNCC = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    TenNCCDichVu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaNguoiDung = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_ThongTinDangNhap", x => new { x.NCCDangNhap, x.KhoaNCC });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        name: "FK_ThongTinDangNhap_NguoiDung_MaNguoiDung",
+                        column: x => x.MaNguoiDung,
+                        principalTable: "NguoiDung",
+                        principalColumn: "MaNguoiDung",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
+                name: "VaiTroNguoiDung",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    MaNguoiDung = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    MaVaiTro = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_VaiTroNguoiDung", x => new { x.MaNguoiDung, x.MaVaiTro });
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        name: "FK_VaiTroNguoiDung_VaiTro_MaVaiTro",
+                        column: x => x.MaVaiTro,
+                        principalTable: "VaiTro",
+                        principalColumn: "MaVaiTro",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        name: "FK_VaiTroNguoiDung_NguoiDung_MaNguoiDung",
+                        column: x => x.MaNguoiDung,
+                        principalTable: "NguoiDung",
+                        principalColumn: "MaNguoiDung",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
+                name: "TokenNguoiDung",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MaNguoiDung = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    NCCDangNhap = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    TenToken = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    GiaTri = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_TokenNguoiDung", x => new { x.MaNguoiDung, x.NCCDangNhap, x.TenToken });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        name: "FK_TokenNguoiDung_NguoiDung_MaNguoiDung",
+                        column: x => x.MaNguoiDung,
+                        principalTable: "NguoiDung",
+                        principalColumn: "MaNguoiDung",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
+                name: "IX_QuyenVaiTro_MaVaiTro",
+                table: "QuyenVaiTro",
+                column: "MaVaiTro");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
+                table: "VaiTro",
+                column: "TenChuanHoa",
                 unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                filter: "[TenChuanHoa] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
+                name: "IX_QuyenNguoiDung_MaNguoiDung",
+                table: "QuyenNguoiDung",
+                column: "MaNguoiDung");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
+                name: "IX_ThongTinDangNhap_MaNguoiDung",
+                table: "ThongTinDangNhap",
+                column: "MaNguoiDung");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
+                name: "IX_VaiTroNguoiDung_MaVaiTro",
+                table: "VaiTroNguoiDung",
+                column: "MaVaiTro");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
+                table: "NguoiDung",
+                column: "EmailChuanHoa");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
+                table: "NguoiDung",
+                column: "TenChuanHoa",
                 unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                filter: "[TenChuanHoa] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                name: "QuyenVaiTro");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                name: "QuyenNguoiDung");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                name: "ThongTinDangNhap");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                name: "VaiTroNguoiDung");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                name: "TokenNguoiDung");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "VaiTro");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "NguoiDung");
         }
     }
 }

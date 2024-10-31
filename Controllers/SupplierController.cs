@@ -33,15 +33,15 @@ namespace FashionShop.Controllers
             ViewData["sortModel"] = sortModel;
 
             ViewBag.SearchText = SearchText;
-            PaginatedList<Supplier> suppliers = _repo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder, SearchText, pg, pageSize);
+            PaginatedList<Supplier> NhaCungCap = _repo.GetItems(sortModel.SortedProperty, sortModel.SortedOrder, SearchText, pg, pageSize);
 
-            var pager = new PagerModel(suppliers.TotalRecords, pg, pageSize);
+            var pager = new PagerModel(NhaCungCap.TotalRecords, pg, pageSize);
             pager.SortExpression = sortExpression;
             this.ViewBag.Pager = pager;
 
 
             TempData["CurrentPage"] = pg;
-            return View(suppliers);
+            return View(NhaCungCap);
         }
 
 
@@ -58,14 +58,14 @@ namespace FashionShop.Controllers
             string errMessage = "";
             try
             {                
-                if (_repo.IsSupplierCodeExists(supplier.Code) == true)
-                    errMessage = errMessage + " " + " Supplier Code " + supplier.Code + " Exists Already";
+                if (_repo.IsSupplierCodeExists(supplier.MaNCC) == true)
+                    errMessage = errMessage + " " + " Supplier Code " + supplier.MaNCC + " Exists Already";
 
-                if (_repo.IsSupplierNameExists(supplier.Name) == true)
-                    errMessage = errMessage + " " + " Supplier Name " + supplier.Name + " Exists Already";
+                if (_repo.IsSupplierNameExists(supplier.TenNCC) == true)
+                    errMessage = errMessage + " " + " Supplier Name " + supplier.TenNCC + " Exists Already";
 
-                if (_repo.IsSupplierEmailExists(supplier.EmailId) == true)
-                    errMessage = errMessage + " " + " Supplier Email " + supplier.EmailId + " Exists Already";
+                if (_repo.IsSupplierEmailExists(supplier.Email) == true)
+                    errMessage = errMessage + " " + " Supplier Email " + supplier.Email + " Exists Already";
 
                 if (errMessage == "")
                 {
@@ -85,7 +85,7 @@ namespace FashionShop.Controllers
             }
             else
             {
-                TempData["SuccessMessage"] = "Supplier " + supplier.Name + " Created Successfully";
+                TempData["SuccessMessage"] = "Supplier " + supplier.TenNCC + " Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -111,18 +111,18 @@ namespace FashionShop.Controllers
             string errMessage = "";
             try
             {
-                if (_repo.IsSupplierCodeExists(supplier.Code,supplier.Id) == true)
-                    errMessage = errMessage + " " + " Supplier Code " + supplier.Code + " Exists Already";
+                if (_repo.IsSupplierCodeExists(supplier.MaNCC) == true)
+                    errMessage = errMessage + " " + " Supplier Code " + supplier.MaNCC + " Exists Already";
 
-                if (_repo.IsSupplierNameExists(supplier.Name, supplier.Id) == true)
-                    errMessage = errMessage + " " + " Supplier Name " + supplier.Name + " Exists Already";
+                if (_repo.IsSupplierNameExists(supplier.TenNCC) == true)
+                    errMessage = errMessage + " " + " Supplier Name " + supplier.TenNCC + " Exists Already";
 
-                if (_repo.IsSupplierEmailExists(supplier.EmailId, supplier.Id) == true)
-                    errMessage = errMessage + " " + " Supplier Email " + supplier.EmailId + " Exists Already";
+                if (_repo.IsSupplierEmailExists(supplier.Email) == true)
+                    errMessage = errMessage + " " + " Supplier Email " + supplier.Email + " Exists Already";
                 if (errMessage == "")
                 {
                     supplier = _repo.Edit(supplier);
-                    TempData["SuccessMessage"] = supplier.Name + ", Supplier Saved Successfully";
+                    TempData["SuccessMessage"] = supplier.TenNCC + ", Supplier Saved Successfully";
                     bolret = true;
                 }                               
             }
@@ -170,7 +170,7 @@ namespace FashionShop.Controllers
             if (TempData["CurrentPage"] != null)
                 currentPage = (int)TempData["CurrentPage"];
 
-            TempData["SuccessMessage"] = "Supplier " + supplier.Name + " Deleted Successfully";
+            TempData["SuccessMessage"] = "Supplier " + supplier.TenNCC + " Deleted Successfully";
             return RedirectToAction(nameof(Index), new { pg = currentPage });
 
 

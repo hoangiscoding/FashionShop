@@ -2,43 +2,43 @@
 
 namespace FashionShop.Migrations
 {
-    public partial class AddedBrandidToProduct : Migration
+    public partial class AddedMaThuongHieuToProduct : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "BrandId",
-                table: "Products",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "MaThuongHieu",
+                table: "SanPham",
+                type: "nvarchar(50)",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_BrandId",
-                table: "Products",
-                column: "BrandId");
+                name: "IX_SanPham_MaThuongHieu",
+                table: "SanPham",
+                column: "MaThuongHieu");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_Brands_BrandId",
-                table: "Products",
-                column: "BrandId",
-                principalTable: "Brands",
-                principalColumn: "Id",
+                name: "FK_SanPham_ThuongHieu_MaThuongHieu",
+                table: "SanPham",
+                column: "MaThuongHieu",
+                principalTable: "ThuongHieu",
+                principalColumn: "MaThuongHieu",
                 onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Products_Brands_BrandId",
-                table: "Products");
+                name: "FK_SanPham_ThuongHieu_MaThuongHieu",
+                table: "SanPham");
 
             migrationBuilder.DropIndex(
-                name: "IX_Products_BrandId",
-                table: "Products");
+                name: "IX_SanPham_MaThuongHieu",
+                table: "SanPham");
 
             migrationBuilder.DropColumn(
-                name: "BrandId",
-                table: "Products");
+                name: "MaThuongHieu",
+                table: "SanPham");
         }
     }
 }

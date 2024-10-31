@@ -2,43 +2,43 @@
 
 namespace FashionShop.Migrations
 {
-    public partial class AddedCategoryidToProduct : Migration
+    public partial class AddedMaDanhMucToProduct : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "CategoryId",
-                table: "Products",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "MaDanhMuc",
+                table: "SanPham",
+                type: "nvarchar(50)",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
+                name: "IX_SanPham_MaDanhMuc",
+                table: "SanPham",
+                column: "MaDanhMuc");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_Categories_CategoryId",
-                table: "Products",
-                column: "CategoryId",
-                principalTable: "Categories",
-                principalColumn: "Id",
+                name: "FK_SanPham_DanhMuc_MaDanhMuc",
+                table: "SanPham",
+                column: "MaDanhMuc",
+                principalTable: "DanhMuc",
+                principalColumn: "MaDanhMuc",
                 onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Products_Categories_CategoryId",
-                table: "Products");
+                name: "FK_SanPham_DanhMuc_MaDanhMuc",
+                table: "SanPham");
 
             migrationBuilder.DropIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products");
+                name: "IX_SanPham_MaDanhMuc",
+                table: "SanPham");
 
             migrationBuilder.DropColumn(
-                name: "CategoryId",
-                table: "Products");
+                name: "MaDanhMuc",
+                table: "SanPham");
         }
     }
 }

@@ -12,14 +12,14 @@ namespace FashionShop.Repositories
         }
         public Category Create(Category category)
         {
-            _context.Categories.Add(category);
+            _context.DanhMuc.Add(category);
             _context.SaveChanges();
             return category;
         }
 
         public Category Delete(Category category)
         {
-            _context.Categories.Attach(category);
+            _context.DanhMuc.Attach(category);
             _context.Entry(category).State = EntityState.Deleted;
             _context.SaveChanges();
             return category;
@@ -27,7 +27,7 @@ namespace FashionShop.Repositories
 
         public Category Edit(Category category)
         {
-            _context.Categories.Attach(category);
+            _context.DanhMuc.Attach(category);
             _context.Entry(category).State = EntityState.Modified;
             _context.SaveChanges();
             return category;
@@ -40,16 +40,16 @@ namespace FashionShop.Repositories
             if (SortProperty.ToLower() == "name")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.Name).ToList();
+                    items = items.OrderBy(n => int.Parse(n.MaDanhMuc)).ToList();
                 else
-                    items = items.OrderByDescending(n => n.Name).ToList();
+                    items = items.OrderByDescending(n => int.Parse(n.MaDanhMuc)).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(d => d.Description).ToList();
+                    items = items.OrderBy(d => d.MoTa).ToList();
                 else
-                    items = items.OrderByDescending(d => d.Description).ToList();
+                    items = items.OrderByDescending(d => d.MoTa).ToList();
             }
 
             return items;
@@ -61,11 +61,11 @@ namespace FashionShop.Repositories
 
             if (SearchText != "" && SearchText != null)
             {
-                items = _context.Categories.Where(n => n.Name.Contains(SearchText) || n.Description.Contains(SearchText))
+                items = _context.DanhMuc.Where(n => n.TenDanhMuc.Contains(SearchText) || n.MoTa.Contains(SearchText))
                     .ToList();
             }
             else
-                items = _context.Categories.ToList();
+                items = _context.DanhMuc.ToList();
 
             items = DoSort(items, SortProperty, sortOrder);
 
@@ -76,12 +76,12 @@ namespace FashionShop.Repositories
 
         public Category GetItem(int id)
         {
-            Category item = _context.Categories.Where(u => u.Id == id).FirstOrDefault();
+            Category item = _context.DanhMuc.Where(u => int.Parse(u.MaDanhMuc) == id).FirstOrDefault();
             return item;
         }
         public bool IsItemExists(string name)
         {
-            int ct = _context.Categories.Where(n => n.Name.ToLower() == name.ToLower()).Count();
+            int ct = _context.DanhMuc.Where(n => n.TenDanhMuc.ToLower() == name.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -90,7 +90,7 @@ namespace FashionShop.Repositories
 
         public bool IsItemExists(string name, int Id)
         {
-            int ct = _context.Categories.Where(n => n.Name.ToLower() == name.ToLower() && n.Id != Id).Count();
+            int ct = _context.DanhMuc.Where(n => n.TenDanhMuc.ToLower() == name.ToLower() && int.Parse(n.MaDanhMuc) != Id).Count();
             if (ct > 0)
                 return true;
             else

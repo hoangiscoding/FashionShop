@@ -429,7 +429,7 @@ $.validator.addMethod( "creditcardtypes", function( value, element, param ) {
 }, "Please enter a valid credit card number." );
 
 /**
- * Validates currencies with any given symbols by @jameslouiz
+ * Validates TienTe with any given symbols by @jameslouiz
  * Symbols can be optional or required. Symbols required by default
  *
  * Usage examples:
@@ -943,12 +943,12 @@ $.validator.addMethod( "postcodeUK", function( value, element ) {
  * The end result is that neither of these inputs:
  *
  *	<input class="productinfo" name="partnumber">
- *	<input class="productinfo" name="description">
+ *	<input class="productinfo" name="MoTa">
  *
  *	...will validate unless at least one of them is filled.
  *
  * partnumber:	{require_from_group: [1,".productinfo"]},
- * description: {require_from_group: [1,".productinfo"]}
+ * MoTa: {require_from_group: [1,".productinfo"]}
  *
  * options[0]: number of fields that must be filled in the group
  * options[1]: CSS selector that defines the group of conditionally required fields
@@ -982,14 +982,14 @@ $.validator.addMethod( "require_from_group", function( value, element, options )
  * The end result, is that none of these inputs:
  *
  *	<input class="productinfo" name="partnumber">
- *	<input class="productinfo" name="description">
+ *	<input class="productinfo" name="MoTa">
  *	<input class="productinfo" name="color">
  *
  *	...will validate unless either at least two of them are filled,
  *	OR none of them are.
  *
  * partnumber:	{skip_or_fill_minimum: [2,".productinfo"]},
- * description: {skip_or_fill_minimum: [2,".productinfo"]},
+ * MoTa: {skip_or_fill_minimum: [2,".productinfo"]},
  * color:		{skip_or_fill_minimum: [2,".productinfo"]}
  *
  * options[0]: number of fields that must be filled in the group

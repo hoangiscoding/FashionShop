@@ -10,14 +10,14 @@ namespace FashionShop.Repositories
         }
         public Unit Create(Unit unit)
         {
-            _context.Units.Add(unit);
+            _context.DonVi.Add(unit);
             _context.SaveChanges();
             return unit;
         }
 
         public Unit Delete(Unit unit)
         {
-            _context.Units.Attach(unit);
+            _context.DonVi.Attach(unit);
             _context.Entry(unit).State = EntityState.Deleted;
             _context.SaveChanges();
             return unit;
@@ -25,61 +25,61 @@ namespace FashionShop.Repositories
 
         public Unit Edit(Unit unit)
         {
-            _context.Units.Attach(unit);
+            _context.DonVi.Attach(unit);
             _context.Entry(unit).State = EntityState.Modified;
             _context.SaveChanges();
             return unit;
         }
 
 
-        private List<Unit> DoSort(List<Unit> units, string SortProperty, SortOrder sortOrder)
+        private List<Unit> DoSort(List<Unit> DonVi, string SortProperty, SortOrder sortOrder)
         {           
 
             if (SortProperty.ToLower() == "name")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    units = units.OrderBy(n => n.Name).ToList();
+                    DonVi = DonVi.OrderBy(n => n.TenDonVi).ToList();
                 else
-                    units = units.OrderByDescending(n => n.Name).ToList();
+                    DonVi = DonVi.OrderByDescending(n => n.TenDonVi).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    units = units.OrderBy(d => d.Description).ToList();
+                    DonVi = DonVi.OrderBy(d => d.MoTa).ToList();
                 else
-                    units = units.OrderByDescending(d => d.Description).ToList();
+                    DonVi = DonVi.OrderByDescending(d => d.MoTa).ToList();
             }
 
-            return units;
+            return DonVi;
         }
 
         public PaginatedList<Unit> GetItems(string SortProperty, SortOrder sortOrder,string SearchText="",int pageIndex=1,int pageSize=5)
         {
-            List<Unit> units;
+            List<Unit> DonVi;
 
             if (SearchText != "" && SearchText!=null)
             {
-                units = _context.Units.Where(n => n.Name.Contains(SearchText) || n.Description.Contains(SearchText))
+                DonVi = _context.DonVi.Where(n => n.TenDonVi.Contains(SearchText) || n.MoTa.Contains(SearchText))
                     .ToList();            
             }
             else
-                units= _context.Units.ToList();
+                DonVi= _context.DonVi.ToList();
 
-            units = DoSort(units,SortProperty,sortOrder);
+            DonVi = DoSort(DonVi,SortProperty,sortOrder);
             
-            PaginatedList<Unit> retUnits = new PaginatedList<Unit>(units, pageIndex, pageSize);
+            PaginatedList<Unit> retDonVi = new PaginatedList<Unit>(DonVi, pageIndex, pageSize);
 
-            return retUnits;
+            return retDonVi;
         }
 
         public Unit GetUnit(int id)
         {
-            Unit unit = _context.Units.Where(u => u.Id == id).FirstOrDefault();
+            Unit unit = _context.DonVi.Where(u => u.MaDonVi == id.ToString()).FirstOrDefault();
             return unit;
         }
         public bool IsUnitNameExists(string name)
         {
-            int ct = _context.Units.Where(n => n.Name.ToLower() == name.ToLower()).Count();
+            int ct = _context.DonVi.Where(n => n.TenDonVi.ToLower() == name.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -88,7 +88,7 @@ namespace FashionShop.Repositories
 
         public bool IsUnitNameExists(string name,int Id)
         {
-            int ct = _context.Units.Where(n => n.Name.ToLower() == name.ToLower() && n.Id!=Id).Count();
+            int ct = _context.DonVi.Where(n => n.TenDonVi.ToLower() == name.ToLower() && int.Parse(n.MaDonVi) !=Id).Count();
             if (ct > 0)
                 return true;
             else

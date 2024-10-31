@@ -3,27 +3,23 @@
     public class Supplier
     {
         [Key]
-        public int Id { get; set; }
-
-        [Required]
-        [StringLength(6)]
-        public string Code { get; set; } = "";
+        public string MaNCC { get; set; }
 
         [Required]
         [MaxLength(75)]
-        public string Name { get; set; } = "";        
+        public string TenNCC { get; set; } = "";        
         
 
-        [Remote("IsEmailExists","Supplier",AdditionalFields="Id", ErrorMessage ="Email Id Already Exists")]
+        [Remote("IsEmailExists","Supplier",AdditionalFields="Id", ErrorMessage ="Email Already Exists")]
         [Required]
         [MaxLength(75)]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-Mail is not Valid")]
-        public string EmailId { get; set; } = "";
+        public string Email { get; set; } = "";
 
         [MaxLength(75)]
-        public string Address { get; set; } = "";
+        public string DiaChi { get; set; } = "";
 
         [MaxLength(75)]
-        public string PhoneNo { get; set; } = "";
+        public string SDT { get; set; } = "";
     }
 }

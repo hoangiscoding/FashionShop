@@ -15,7 +15,7 @@
         {
             SortModel sortModel = new SortModel();
             sortModel.AddColumn("name");
-            sortModel.AddColumn("description");
+            sortModel.AddColumn("MoTa");
             sortModel.ApplySort(sortExpression);
             ViewData["sortModel"] = sortModel;
 
@@ -37,7 +37,7 @@
         public IActionResult Create()
         {
             Currency item = new Currency();
-        ViewBag.ExchangeCurrencyId = GetCurrencyList();
+        ViewBag.MaTraoDoiTienTe = GetCurrencyList();
 
             return View(item);
         }
@@ -67,7 +67,7 @@
             }
             else
             {
-                TempData["SuccessMessage"] = "" + item.Name + " Created Successfully";
+                TempData["SuccessMessage"] = "" + item.TenTienTe + " Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -75,7 +75,7 @@
         public IActionResult Details(int id) //Read
         {
             Currency item = _Repo.GetItem(id);
-        ViewBag.ExchangeCurrencyId = GetCurrencyList();
+        ViewBag.MaTraoDoiTienTe = GetCurrencyList();
         return View(item);
         }
 
@@ -83,7 +83,7 @@
         public IActionResult Edit(int id)
         {
             Currency item = _Repo.GetItem(id);
-        ViewBag.ExchangeCurrencyId = GetCurrencyList();
+        ViewBag.MaTraoDoiTienTe = GetCurrencyList();
         TempData.Keep();
             return View(item);
         }
@@ -123,7 +123,7 @@
         public IActionResult Delete(int id)
         {
             Currency item = _Repo.GetItem(id);
-        ViewBag.ExchangeCurrencyId = GetCurrencyList();
+        ViewBag.MaTraoDoiTienTe = GetCurrencyList();
         TempData.Keep();
             return View(item);
         }
@@ -160,7 +160,7 @@
             }
             else
             {
-                TempData["SuccessMessage"] = item.Name + " Deleted Successfully";
+                TempData["SuccessMessage"] = item.TenTienTe + " Deleted Successfully";
                 return RedirectToAction(nameof(Index), new { pg = currentPage });
             }
         }
@@ -174,8 +174,8 @@
         PaginatedList<Currency> items = _Repo.GetItems("Name", SortOrder.Ascending, "", 1, 1000);
         lstItems = items.Select(ut => new SelectListItem()
         {
-            Value = ut.Id.ToString(),
-            Text = ut.Name
+            Value = ut.MaTienTe.ToString(),
+            Text = ut.TenTienTe
         }).ToList();
 
         var defItem = new SelectListItem()

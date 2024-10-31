@@ -4,15 +4,15 @@
     public class Category
     {
         [Key]
-        public int Id { get; set; }
+        public string MaDanhMuc { get; set; }
 
         [Required]
-        [StringLength(25)]
-        public string Name { get; set; }
+        [StringLength(50)]
+        public string TenDanhMuc { get; set; }
 
         [Required]
-        [StringLength(75)]
-        public string Description { get; set; }
+        [StringLength(100)]
+        public string MoTa { get; set; }
 
     }
 }

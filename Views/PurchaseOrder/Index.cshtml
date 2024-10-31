@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FashionShop.Models.PoHeader>
+﻿@model IEnumerable<FashionShop.Models.DonHang>
 
 
 @{
@@ -40,16 +40,16 @@
 
 
             <th>
-                <i class="@sortModel.GetColumn("PoNumber").SortIcon" arial-hidden="true"></i>
-                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("PoNumber").SortExpression">
+                <i class="@sortModel.GetColumn("MaDonHang").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("MaDonHang").SortExpression">
                     P.No
                 </a>
             </th>
 
             <th>
-                <i class="@sortModel.GetColumn("PoDate").SortIcon" arial-hidden="true"></i>
-                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("PoDate").SortExpression">
-                    @Html.DisplayNameFor(model => model.PoDate)
+                <i class="@sortModel.GetColumn("NgayTao").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("NgayTao").SortExpression">
+                    @Html.DisplayNameFor(model => model.NgayTao)
                 </a>
             </th>
 
@@ -62,20 +62,20 @@
                 @Html.DisplayNameFor(model => model.POCurrency)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ExchangeRate)
+                @Html.DisplayNameFor(model => model.TyGiaHoiDoai)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DiscountPercent)
+                @Html.DisplayNameFor(model => model.GiamGia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QuotationNo)
+                @Html.DisplayNameFor(model => model.MaBaoGia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QuotationDate)
+                @Html.DisplayNameFor(model => model.NgayBaoGia)
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.Remarks)
+                @Html.DisplayNameFor(model => model.GhiChu)
             </th>
             <th></th>
         </tr>
@@ -85,48 +85,48 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PoNumber)
+                    @Html.DisplayFor(modelItem => item.MaDonHang)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PoDate)
+                    @Html.DisplayFor(modelItem => item.NgayTao)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.Code)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.POCurrency.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExchangeRate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DiscountPercent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuotationNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuotationDate)
+                    @Html.DisplayFor(modelItem => item.Supplier.MaNCC)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Remarks)
+                    @Html.DisplayFor(modelItem => item.POCurrency.MoTa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TyGiaHoiDoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiamGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaBaoGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayBaoGia)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.GhiChu)
                 </td>
                 <td>
 
                     <div class="btn-group">
-                        <a asp-action="Edit" asp-route-id="@item.Id">
+                        <a asp-action="Edit" asp-route-id="@item.MaDonHang">
                             <span class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </span>
                         </a>
-                        <a asp-action="Details" asp-route-id="@item.Id">
+                        <a asp-action="Details" asp-route-id="@item.MaDonHang">
                             <span class="btn btn-sm btn-outline-dark">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </span>
                         </a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">
+                        <a asp-action="Delete" asp-route-id="@item.MaDonHang">
                             <span class="btn btn-sm btn-outline-danger">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </span>

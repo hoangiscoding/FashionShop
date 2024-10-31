@@ -2,59 +2,59 @@
 {
     public class Product
     {
-        [Remote("IsProductCodeValid","Product", AdditionalFields ="Name", ErrorMessage ="Product Code Exists Already")]
+        [Remote("IsMaSPValid","Product", AdditionalFields ="Name", ErrorMessage ="Product Code Exists Already")]
         [Key]
-        [StringLength(6)]
-        public string Code { get; set; }
+        [StringLength(50)]
+        public string MaSP { get; set; }
 
         [Remote("IsProductNameValid", "Product", AdditionalFields = "Code", ErrorMessage = "Product Name Exists Already")]
         [Required]
         [StringLength(75)]
-        public String Name { get; set; }
+        public String TenSP { get; set; }
 
         [Required]
         [StringLength(255)]
-        public String Description { get; set; }
+        public String MoTa { get; set; }
 
         [Required]         
-        [Column(TypeName ="smallmoney")]
-        public decimal Cost { get; set; }
+        [Column(TypeName ="money")]
+        public decimal DonGiaNhap { get; set; }
 
         [Required]
-        [Column(TypeName = "smallmoney")]
-        public decimal Price { get; set; }
+        [Column(TypeName = "money")]
+        public decimal DonGiaBan { get; set; }
 
         [Required]
-        [ForeignKey("Units")]
+        [ForeignKey("DonVi")]
         [Display(Name="Unit")]
-        public int UnitId { get; set; }
-        public virtual Unit Units { get; set; }
+        public string MaDonVi { get; set; }
+        public virtual Unit DonVi { get; set; }
 
 
         
-        [ForeignKey("Brands")]
+        [ForeignKey("ThuongHieu")]
         [Display(Name = "Brand")]
-        public int? BrandId { get; set; }
-        public virtual Brand Brands { get; set; }
+        public string? MaThuongHieu { get; set; }
+        public virtual Brand ThuongHieu { get; set; }
 
 
-        [ForeignKey("Categories")]
+        [ForeignKey("DanhMuc")]
         [Display(Name = "Category")]
-        public int? CategoryId { get; set; }
-        public virtual Category Categories { get; set; }
+        public string? MaDanhMuc { get; set; }
+        public virtual Category DanhMuc { get; set; }
 
-        [ForeignKey("ProductGroups")]
+        [ForeignKey("NhomSP")]
         [Display(Name = "ProductGroup")]
-        public int? ProductGroupId { get; set; }
-        public virtual ProductGroup ProductGroups { get; set; }
+        public string? MaNhomSP { get; set; }
+        public virtual ProductGroup NhomSP { get; set; }
 
 
-        [ForeignKey("ProductProfiles")]
+        [ForeignKey("HoSoSP")]
         [Display(Name = "ProductProfile")]
-        public int? ProductProfileId { get; set; }
-        public virtual ProductProfile ProductProfiles { get; set; }
+        public string? MaHoSoSP { get; set; }
+        public virtual ProductProfile HoSoSP { get; set; }
 
-        public string PhotoUrl { get; set; } = "noimage.png";
+        public string Anh { get; set; } = "noimage.png";
 
         [Display(Name = "Product Photo")]
         [NotMapped]

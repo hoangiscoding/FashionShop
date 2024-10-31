@@ -11,15 +11,15 @@ namespace FashionShop.Repositories
         }
         public Product Create(Product Product)
         {
-            _context.Products.Add(Product);
+            _context.SanPham.Add(Product);
             _context.SaveChanges();
             return Product;
         }
 
         public Product Delete(Product Product)
         {
-            Product = pGetItem(Product.Code);
-            _context.Products.Attach(Product);
+            Product = pGetItem(Product.MaSP);
+            _context.SanPham.Attach(Product);
             _context.Entry(Product).State = EntityState.Deleted;
             _context.SaveChanges();
             return Product;
@@ -27,7 +27,7 @@ namespace FashionShop.Repositories
 
         public Product Edit(Product Product)
         {
-            _context.Products.Attach(Product);
+            _context.SanPham.Attach(Product);
             _context.Entry(Product).State = EntityState.Modified;
             _context.SaveChanges();
             return Product;
@@ -40,23 +40,23 @@ namespace FashionShop.Repositories
             if (SortProperty.ToLower() == "name")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.Name).ToList();
+                    items = items.OrderBy(n => n.TenSP).ToList();
                 else
-                    items = items.OrderByDescending(n => n.Name).ToList();
+                    items = items.OrderByDescending(n => n.TenSP).ToList();
             }
             else if (SortProperty.ToLower() == "code")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.Code).ToList();
+                    items = items.OrderBy(n => n.MaSP).ToList();
                 else
-                    items = items.OrderByDescending(n => n.Code).ToList();
+                    items = items.OrderByDescending(n => n.MaSP).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(d => d.Description).ToList();
+                    items = items.OrderBy(d => d.MoTa).ToList();
                 else
-                    items = items.OrderByDescending(d => d.Description).ToList();
+                    items = items.OrderByDescending(d => d.MoTa).ToList();
             }
 
             return items;
@@ -68,12 +68,12 @@ namespace FashionShop.Repositories
 
             if (SearchText != "" && SearchText != null)
             {
-                items = _context.Products.Where(n => n.Name.Contains(SearchText) || n.Description.Contains(SearchText))
-                    .Include(u=>u.Units)
+                items = _context.SanPham.Where(n => n.TenSP.Contains(SearchText) || n.MoTa.Contains(SearchText))
+                    .Include(u=>u.DonVi)
                     .ToList();
             }
             else
-                items = _context.Products.Include(u => u.Units).ToList();
+                items = _context.SanPham.Include(u => u.DonVi).ToList();
 
 
             items = DoSort(items, SortProperty, sortOrder);
@@ -85,11 +85,11 @@ namespace FashionShop.Repositories
 
         public Product GetItem(string Code)
         {
-            Product item = _context.Products.Where(u => u.Code == Code)
-                .Include(u=>u.Units)
+            Product item = _context.SanPham.Where(u => u.MaSP == Code)
+                .Include(u=>u.DonVi)
                 .FirstOrDefault();
 
-            item.BreifPhotoName = GetBriefPhotoName(item.PhotoUrl);
+            item.BreifPhotoName = GetBriefPhotoName(item.Anh);
 
             return item;
         }
@@ -108,13 +108,13 @@ namespace FashionShop.Repositories
 
         public Product pGetItem(string Code)
         {
-            Product item = _context.Products.Where(u => u.Code == Code)                
+            Product item = _context.SanPham.Where(u => u.MaSP == Code)                
                 .FirstOrDefault();
             return item;
         }
         public bool IsItemExists(string name)
         {
-            int ct = _context.Products.Where(n => n.Name.ToLower() == name.ToLower()).Count();
+            int ct = _context.SanPham.Where(n => n.TenSP.ToLower() == name.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -124,7 +124,7 @@ namespace FashionShop.Repositories
         {
             if (Code == "")
                 return IsItemExists(name);
-            var strCode = _context.Products.Where(n => n.Name == name).Max(cd => cd.Code);
+            var strCode = _context.SanPham.Where(n => n.TenSP == name).Max(cd => cd.MaSP);
             if (strCode == null || strCode == Code)
                 return false;
             else           
@@ -132,7 +132,7 @@ namespace FashionShop.Repositories
         }
         public bool IsItemCodeExists(string itemCode)
         {
-            int ct = _context.Products.Where(n => n.Code.ToLower() == itemCode.ToLower()).Count();
+            int ct = _context.SanPham.Where(n => n.MaSP.ToLower() == itemCode.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -142,7 +142,7 @@ namespace FashionShop.Repositories
         {
             if (name == "")
                 return IsItemCodeExists(itemCode);
-            var strName = _context.Products.Where(n => n.Code == itemCode).Max(nm => nm.Name);
+            var strName = _context.SanPham.Where(n => n.MaSP == itemCode).Max(nm => nm.TenSP);
             if (strName == null || strName == name)
                 return false;
             else          

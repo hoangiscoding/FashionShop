@@ -23,69 +23,69 @@
 
 
                         <div class="form-group col-6">
-                            <label asp-for="Code" class="control-label"></label>
-                            <input asp-for="Code" class="form-control" readonly />
+                            <label asp-for="MaSP" class="control-label"></label>
+                            <input asp-for="MaSP" class="form-control" readonly />
                         </div>
 
 
                         <div class="form-group col-6">
-                            <label asp-for="Name" class="control-label"></label>
-                            <input asp-for="Name" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="TenSP" class="control-label"></label>
+                            <input asp-for="TenSP" class="form-control" />
+                            <span asp-validation-for="TenSP" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-6">
-                            <label asp-for="Description" class="control-label"></label>
-                            <input asp-for="Description" class="form-control" />
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-
-
-                        <div class="form-group col-6">
-                            <label asp-for="Cost" class="control-label"></label>
-                            <input asp-for="Cost" class="form-control" />
-                            <span asp-validation-for="Cost" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group col-6">
-                            <label asp-for="Price" class="control-label"></label>
-                            <input asp-for="Price" class="form-control" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
+                            <label asp-for="MoTa" class="control-label"></label>
+                            <input asp-for="MoTa" class="form-control" />
+                            <span asp-validation-for="MoTa" class="text-danger"></span>
                         </div>
 
 
                         <div class="form-group col-6">
-                            <label asp-for="UnitId" class="control-label"></label>
-                            <select asp-for="UnitId" class="form-control" asp-items="ViewBag.Units"></select>
-                            <span asp-validation-for="UnitId" class="text-danger"></span>
+                            <label asp-for="DonGiaNhap" class="control-label"></label>
+                            <input asp-for="DonGiaNhap" class="form-control" />
+                            <span asp-validation-for="DonGiaNhap" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label asp-for="DonGiaBan" class="control-label"></label>
+                            <input asp-for="DonGiaBan" class="form-control" />
+                            <span asp-validation-for="DonGiaBan" class="text-danger"></span>
                         </div>
 
 
                         <div class="form-group col-6">
-                            <label asp-for="BrandId" class="control-label"></label>
-                            <select asp-for="BrandId" class="form-control" asp-items="ViewBag.Brands"></select>
-                            <span asp-validation-for="BrandId" class="text-danger"></span>
+                            <label asp-for="MaDonVi" class="control-label"></label>
+                            <select asp-for="MaDonVi" class="form-control" asp-items="ViewBag.DonVi"></select>
+                            <span asp-validation-for="MaDonVi" class="text-danger"></span>
                         </div>
 
 
                         <div class="form-group col-6">
-                            <label asp-for="CategoryId" class="control-label"></label>
-                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            <label asp-for="MaThuongHieu" class="control-label"></label>
+                            <select asp-for="MaThuongHieu" class="form-control" asp-items="ViewBag.ThuongHieu"></select>
+                            <span asp-validation-for="MaThuongHieu" class="text-danger"></span>
                         </div>
 
 
                         <div class="form-group col-6">
-                            <label asp-for="ProductGroupId" class="control-label"></label>
-                            <select asp-for="ProductGroupId" class="form-control" asp-items="ViewBag.ProductGroups"></select>
-                            <span asp-validation-for="ProductGroupId" class="text-danger"></span>
+                            <label asp-for="MaDanhMuc" class="control-label"></label>
+                            <select asp-for="MaDanhMuc" class="form-control" asp-items="ViewBag.DanhMuc"></select>
+                            <span asp-validation-for="MaDanhMuc" class="text-danger"></span>
                         </div>
 
 
                         <div class="form-group col-6">
-                            <label asp-for="ProductProfileId" class="control-label"></label>
-                            <select asp-for="ProductProfileId" class="form-control" asp-items="ViewBag.ProductProfiles"></select>
-                            <span asp-validation-for="ProductProfileId" class="text-danger"></span>
+                            <label asp-for="MaNhomSP" class="control-label"></label>
+                            <select asp-for="MaNhomSP" class="form-control" asp-items="ViewBag.NhomSP"></select>
+                            <span asp-validation-for="MaNhomSP" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group col-6">
+                            <label asp-for="MaHoSoSP" class="control-label"></label>
+                            <select asp-for="MaHoSoSP" class="form-control" asp-items="ViewBag.HoSoSP"></select>
+                            <span asp-validation-for="MaHoSoSP" class="text-danger"></span>
                         </div>
 
 
@@ -97,7 +97,7 @@
 
                 <div class="col-4 row">
                     <div class="form-group col-12 justify-content-center align-middle mb-0 pb-0">
-                        <img id="PreviewPhoto" src="~/images/@Model.PhotoUrl" alt="Logo Image"
+                        <img id="PreviewPhoto" src="~/images/@Model.Anh" alt="Logo Image"
                              width="300" height="300" style="border:1px ;margin-top:30px; " />
                     </div>
 
@@ -110,7 +110,7 @@
                         <span class="text-danger invisible" id="ImageError">Please choose image</span>
                     </div>
 
-                    <input type="hidden" asp-for="@Model.PhotoUrl" id="PhotoUrl" />
+                    <input type="hidden" asp-for="@Model.Anh" id="Anh" />
 
                     <div class="form-group col-10 pt-0 mt-0">
                         <div class="custom-file">
@@ -174,7 +174,7 @@
 
             document.getElementById('PreviewPhoto').src = window.URL.createObjectURL(this.files[0]);
 
-            document.getElementById('PhotoUrl').value = fileName;
+            document.getElementById('Anh').value = fileName;
 
         });
 
@@ -219,7 +219,7 @@
 
         function IsImageSelected() {
 
-            if (document.getElementById('PhotoUrl').value == 'Error') {
+            if (document.getElementById('Anh').value == 'Error') {
                 return "Image Not Selected To Upload";
             }
 

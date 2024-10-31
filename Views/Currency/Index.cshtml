@@ -37,23 +37,23 @@
             <th>
                 <i class="@sortModel.GetColumn("name").SortIcon" arial-hidden="true"></i>
                 <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("name").SortExpression">
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayNameFor(model => model.TenTienTe)
                 </a>
             </th>
 
              <th>
-                <i class="@sortModel.GetColumn("Description").SortIcon" arial-hidden="true"></i>
-                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("Description").SortExpression">
-                    @Html.DisplayNameFor(model => model.Description)
+                <i class="@sortModel.GetColumn("MoTa").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("MoTa").SortExpression">
+                    @Html.DisplayNameFor(model => model.MoTa)
                 </a>
             </th>
 
 
             <th>
-                @Html.DisplayNameFor(model => model.Currencies)
+                @Html.DisplayNameFor(model => model.TienTe)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ExchangeRate)
+                @Html.DisplayNameFor(model => model.TyGiaHoiDoai)
             </th>
             <th></th>
         </tr>
@@ -62,32 +62,32 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.TenTienTe)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.MoTa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Currencies.Description)
+                @Html.DisplayFor(modelItem => item.TienTe.MoTa)
             </td>
             <td>
 
-                @Html.DisplayFor(modelItem => item.ExchangeRate)
+                @Html.DisplayFor(modelItem => item.TyGiaHoiDoai)
             </td>
             <td>
     
              <div class="btn-group">
-                    <a asp-action="Edit" asp-route-id="@item.Id">
+                    <a asp-action="Edit" asp-route-id="@item.MaTienTe">
                         <span class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-edit" aria-hidden="true"></i>
                         </span>
                     </a>
-                    <a asp-action="Details" asp-route-id="@item.Id">
+                    <a asp-action="Details" asp-route-id="@item.MaTienTe">
                         <span class="btn btn-sm btn-outline-dark">
                             <i class="fa fa-eye" aria-hidden="true"></i>
                         </span>
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">
+                    <a asp-action="Delete" asp-route-id="@item.MaTienTe">
                         <span class="btn btn-sm btn-outline-danger">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </span>

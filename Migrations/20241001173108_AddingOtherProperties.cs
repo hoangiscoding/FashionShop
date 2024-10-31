@@ -6,70 +6,70 @@ namespace FashionShop.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "ProductGroupId",
-                table: "Products",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "MaNhomSP",
+                table: "SanPham",
+                type: "nvarchar(50)",
                 nullable: true);
 
-            migrationBuilder.AddColumn<int>(
-                name: "ProductProfileId",
-                table: "Products",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "MaHoSoSP",
+                table: "SanPham",
+                type: "nvarchar(50)",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ProductGroupId",
-                table: "Products",
-                column: "ProductGroupId");
+                name: "IX_SanPham_MaNhomSP",
+                table: "SanPham",
+                column: "MaNhomSP");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ProductProfileId",
-                table: "Products",
-                column: "ProductProfileId");
+                name: "IX_SanPham_MaHoSoSP",
+                table: "SanPham",
+                column: "MaHoSoSP");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_ProductGroups_ProductGroupId",
-                table: "Products",
-                column: "ProductGroupId",
-                principalTable: "ProductGroups",
-                principalColumn: "Id",
+                name: "FK_SanPham_NhomSP_MaNhomSP",
+                table: "SanPham",
+                column: "MaNhomSP",
+                principalTable: "NhomSP",
+                principalColumn: "MaNhomSP",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_ProductProfiles_ProductProfileId",
-                table: "Products",
-                column: "ProductProfileId",
-                principalTable: "ProductProfiles",
-                principalColumn: "Id",
+                name: "FK_SanPham_HoSoSP_MaHoSoSP",
+                table: "SanPham",
+                column: "MaHoSoSP",
+                principalTable: "HoSoSP",
+                principalColumn: "MaHoSoSP",
                 onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Products_ProductGroups_ProductGroupId",
-                table: "Products");
+                name: "FK_SanPham_NhomSP_MaNhomSP",
+                table: "SanPham");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Products_ProductProfiles_ProductProfileId",
-                table: "Products");
+                name: "FK_SanPham_HoSoSP_MaHoSoSP",
+                table: "SanPham");
 
             migrationBuilder.DropIndex(
-                name: "IX_Products_ProductGroupId",
-                table: "Products");
+                name: "IX_SanPham_MaNhomSP",
+                table: "SanPham");
 
             migrationBuilder.DropIndex(
-                name: "IX_Products_ProductProfileId",
-                table: "Products");
+                name: "IX_SanPham_MaHoSoSP",
+                table: "SanPham");
 
             migrationBuilder.DropColumn(
-                name: "ProductGroupId",
-                table: "Products");
+                name: "MaNhomSP",
+                table: "SanPham");
 
             migrationBuilder.DropColumn(
-                name: "ProductProfileId",
-                table: "Products");
+                name: "MaHoSoSP",
+                table: "SanPham");
         }
     }
 }

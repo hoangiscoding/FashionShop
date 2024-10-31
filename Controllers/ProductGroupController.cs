@@ -15,7 +15,7 @@
         {
             SortModel sortModel = new SortModel();
             sortModel.AddColumn("name");
-            sortModel.AddColumn("description");
+            sortModel.AddColumn("MoTa");
             sortModel.ApplySort(sortExpression);
             ViewData["sortModel"] = sortModel;
 
@@ -49,11 +49,11 @@
             string errMessage = "";
             try
             {
-                if (item.Description.Length < 4 || item.Description == null)
-                    errMessage = "Description Must be atleast 4 Characters";
+                if (item.MoTa.Length < 4 || item.MoTa == null)
+                    errMessage = "MoTa Must be atleast 4 Characters";
 
-                if (_Repo.IsItemExists(item.Name) == true)
-                    errMessage = errMessage + " " + " Name " + item.Name + " Exists Already";
+                if (_Repo.IsItemExists(item.TenNhom) == true)
+                    errMessage = errMessage + " " + " Name " + item.TenNhom + " Exists Already";
 
                 if (errMessage == "")
                 {
@@ -73,7 +73,7 @@
             }
             else
             {
-                TempData["SuccessMessage"] = "" + item.Name + " Created Successfully";
+                TempData["SuccessMessage"] = "" + item.TenNhom + " Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -100,16 +100,16 @@
 
             try
             {
-                if (item.Description.Length < 4 || item.Description == null)
-                    errMessage = "Description Must be atleast 4 Characters";
+                if (item.MoTa.Length < 4 || item.MoTa == null)
+                    errMessage = "MoTa Must be atleast 4 Characters";
 
-                if (_Repo.IsItemExists(item.Name, item.Id) == true)
-                    errMessage = errMessage + item.Name + " Already Exists";
+                if (_Repo.IsItemExists(item.TenNhom, int.Parse(item.MaNhomSP)) == true)
+                    errMessage = errMessage + item.TenNhom + " Already Exists";
 
                 if (errMessage == "")
                 {
                     item = _Repo.Edit(item);
-                    TempData["SuccessMessage"] = item.Name + ", Saved Successfully";
+                    TempData["SuccessMessage"] = item.TenNhom + ", Saved Successfully";
                     bolret = true;
                 }
             }
@@ -163,7 +163,7 @@
             if (TempData["CurrentPage"] != null)
                 currentPage = (int)TempData["CurrentPage"];
 
-            TempData["SuccessMessage"] = item.Name + " Deleted Successfully";
+            TempData["SuccessMessage"] = int.Parse(item.MaNhomSP) + " Deleted Successfully";
             return RedirectToAction(nameof(Index), new { pg = currentPage });
 
 

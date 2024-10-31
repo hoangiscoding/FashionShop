@@ -11,14 +11,14 @@ namespace FashionShop.Repositories
         }
         public ProductProfile Create(ProductProfile ProductProfile)
         {
-            _context.ProductProfiles.Add(ProductProfile);
+            _context.HoSoSP.Add(ProductProfile);
             _context.SaveChanges();
             return ProductProfile;
         }
 
         public ProductProfile Delete(ProductProfile ProductProfile)
         {
-            _context.ProductProfiles.Attach(ProductProfile);
+            _context.HoSoSP.Attach(ProductProfile);
             _context.Entry(ProductProfile).State = EntityState.Deleted;
             _context.SaveChanges();
             return ProductProfile;
@@ -26,7 +26,7 @@ namespace FashionShop.Repositories
 
         public ProductProfile Edit(ProductProfile ProductProfile)
         {
-            _context.ProductProfiles.Attach(ProductProfile);
+            _context.HoSoSP.Attach(ProductProfile);
             _context.Entry(ProductProfile).State = EntityState.Modified;
             _context.SaveChanges();
             return ProductProfile;
@@ -39,16 +39,16 @@ namespace FashionShop.Repositories
             if (SortProperty.ToLower() == "name")
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(n => n.Name).ToList();
+                    items = items.OrderBy(n => n.TenHoSoSP).ToList();
                 else
-                    items = items.OrderByDescending(n => n.Name).ToList();
+                    items = items.OrderByDescending(n => n.TenHoSoSP).ToList();
             }
             else
             {
                 if (sortOrder == SortOrder.Ascending)
-                    items = items.OrderBy(d => d.Description).ToList();
+                    items = items.OrderBy(d => d.MoTa).ToList();
                 else
-                    items = items.OrderByDescending(d => d.Description).ToList();
+                    items = items.OrderByDescending(d => d.MoTa).ToList();
             }
 
             return items;
@@ -60,11 +60,11 @@ namespace FashionShop.Repositories
 
             if (SearchText != "" && SearchText != null)
             {
-                items = _context.ProductProfiles.Where(n => n.Name.Contains(SearchText) || n.Description.Contains(SearchText))
+                items = _context.HoSoSP.Where(n => n.TenHoSoSP.Contains(SearchText) || n.MoTa.Contains(SearchText))
                     .ToList();
             }
             else
-                items = _context.ProductProfiles.ToList();
+                items = _context.HoSoSP.ToList();
 
             items = DoSort(items, SortProperty, sortOrder);
 
@@ -75,12 +75,12 @@ namespace FashionShop.Repositories
 
         public ProductProfile GetItem(int id)
         {
-            ProductProfile item = _context.ProductProfiles.Where(u => u.Id == id).FirstOrDefault();
+            ProductProfile item = _context.HoSoSP.Where(u => u.MaHoSoSP == id.ToString()).FirstOrDefault();
             return item;
         }
         public bool IsItemExists(string name)
         {
-            int ct = _context.ProductProfiles.Where(n => n.Name.ToLower() == name.ToLower()).Count();
+            int ct = _context.HoSoSP.Where(n => n.TenHoSoSP.ToLower() == name.ToLower()).Count();
             if (ct > 0)
                 return true;
             else
@@ -89,7 +89,7 @@ namespace FashionShop.Repositories
 
         public bool IsItemExists(string name, int Id)
         {
-            int ct = _context.ProductProfiles.Where(n => n.Name.ToLower() == name.ToLower() && n.Id != Id).Count();
+            int ct = _context.HoSoSP.Where(n => n.TenHoSoSP.ToLower() == name.ToLower() && n.MaHoSoSP != Id.ToString()).Count();
             if (ct > 0)
                 return true;
             else

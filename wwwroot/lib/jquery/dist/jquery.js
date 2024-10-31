@@ -4759,7 +4759,7 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 		// Halve the iteration target value to prevent interference from CSS upper bounds (gh-2144)
 		initial = initial / 2;
 
-		// Trust units reported by jQuery.css
+		// Trust DonVi reported by jQuery.css
 		unit = unit || initialInUnit[ 3 ];
 
 		// Iteratively approximate from a nonzero starting point
@@ -5885,7 +5885,7 @@ jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateTyp
 // Support: Safari 7 only
 // Safari sends mouseenter too often; see:
 // https://bugs.chromium.org/p/chromium/issues/detail?id=470258
-// for the description of the bug (it existed in older Chrome versions as well).
+// for the MoTa of the bug (it existed in older Chrome versions as well).
 jQuery.each( {
 	mouseenter: "mouseover",
 	mouseleave: "mouseout",
