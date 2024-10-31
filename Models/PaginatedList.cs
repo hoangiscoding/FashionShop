@@ -1,4 +1,4 @@
-﻿namespace CodesByAniz.Tools
+﻿namespace Codes.Tools
 {
     public class PaginatedList<T> : List<T>
     {

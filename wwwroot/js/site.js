@@ -47,7 +47,7 @@ function AddItem(btn) {
 }
 function rebindvalidators() {
 
-    var $form = $("#CodeSbyAnizForm");
+    var $form = $("#CodesForm");
 
     $form.unbind();
 
